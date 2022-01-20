@@ -12,7 +12,7 @@ Sekai Game engine - my 2D game engine built base on what I know about game devel
 ## Installation
 
 ### Linux user
-If you use **Debian-based** or **Fedora**, you need to run the pre-installer script in scripts
+If you use **Debian** or **Redhat**, you need to run the pre-installer script in scripts
 
 First, you need to give the script the permission to execute
 ``` bash
@@ -22,7 +22,7 @@ Then run that script
 ``` bash
 ./scripts/pre-installer/linux/<os>/preinstaller.sh
 ```
-Which ```<os>``` is **```debian```** if you use **Debian-based** distro and **```fedora```** if you use **Fedora-based**
+Which ```<os>``` is **```debian```** if you use **Debian** distro and **```redhat```** if you use **Fedora-based**
 
 ### For Web platform
 Because **raylib** require **emscripten SDK**, you need to install it to run it on web. The instruction is [here](https://emscripten.org/docs/getting_started/downloads.html)
