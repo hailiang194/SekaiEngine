@@ -18,7 +18,7 @@ namespace SekaiEngine
             GameObject(const bool& alive = false);
             GameObject(const GameObject& object);
             GameObject& operator=(const GameObject& object);
-            ~GameObject();
+            virtual ~GameObject();
 
             const bool& alive() const;
             const bool& alive();
