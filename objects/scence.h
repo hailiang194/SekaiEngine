@@ -7,7 +7,7 @@
 #include <vector>
 #include <memory>
 #include <stdexcept>
-#include <iostream>
+#include <algorithm>
     
 namespace SekaiEngine
 {
