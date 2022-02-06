@@ -4,9 +4,10 @@ namespace SekaiEngine
 {
   namespace Core
   {
-      Application::Application()
+      Application::Application(const std::string& title, const int& width, const int& height)
       {
-
+        Game::setTitle(title);
+        Game::setSize(width, height);
       }
 
       Application::Application(const Application& app)
@@ -18,6 +19,7 @@ namespace SekaiEngine
       {
         return (*this);
       }
+
 
       void Application::start(const SekaiEngine::Object::Scence_ptr& initScence)
       {
