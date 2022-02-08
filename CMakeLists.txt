@@ -1,5 +1,5 @@
 project(SekaiEngine VERSION 0.0.1)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 
 # Dependencies
 find_package(raylib 4.0.0 QUIET) # QUIET or REQUIRED
@@ -22,12 +22,16 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
 endif()
 
 add_subdirectory(core)
+add_subdirectory(utility)
 add_subdirectory(objects)
+add_subdirectory(graphic)
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_link_libraries(${PROJECT_NAME} INTERFACE 
   engine_core 
   engine_object
+  engine_utility
+  engine_graphic
 )
 
 # I don't know why, but It's work :v

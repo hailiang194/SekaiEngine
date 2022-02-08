@@ -68,7 +68,7 @@ namespace SekaiEngine
             }
         }
 
-        void Scence::addSprite(Sprite_ptr sprite)
+        void Scence::addGameObject(GameObject_ptr sprite)
         {
             if(sprite == nullptr)
             {
@@ -81,7 +81,7 @@ namespace SekaiEngine
             m_sprites.push_back(sprite);
         }
 
-        void Scence::removeSprite(const Sprite_ptr& sprite)
+        void Scence::removeGameObject(const GameObject_ptr& sprite)
         {
             if(sprite == nullptr)
             {

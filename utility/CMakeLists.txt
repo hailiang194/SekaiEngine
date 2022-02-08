@@ -1,0 +1,12 @@
+set(engine_utility_public_headers
+    vector2d.h
+    math.h
+)
+
+set(engine_utility_sources
+    vector2d.cpp
+    math.cpp
+)
+
+add_library(engine_utility STATIC ${engine_utility_public_headers} ${engine_utility_sources})
+target_link_libraries(engine_utility PRIVATE raylib)

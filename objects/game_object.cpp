@@ -5,13 +5,13 @@ namespace SekaiEngine
     namespace Object
     {
         GameObject::GameObject(const bool& alive)
-            :m_alive(alive)
+            :m_alive(alive), m_observer(nullptr)
         {
 
         }
 
         GameObject::GameObject(const GameObject& object)
-            :m_alive(object.m_alive)
+            :m_alive(object.m_alive), m_observer(object.m_observer)
         {
 
         }
@@ -19,7 +19,8 @@ namespace SekaiEngine
         GameObject& GameObject::operator=(const GameObject& object)
         {
             m_alive = object.m_alive;
-            
+            m_observer = object.m_observer;
+
             return (*this);
         }
         

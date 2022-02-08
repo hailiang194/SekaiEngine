@@ -3,7 +3,6 @@
 
 #include "raylib.h"
 #include "game_object.h"
-#include "sprite.h"
 #include <vector>
 #include <memory>
 #include <stdexcept>
@@ -34,17 +33,17 @@ namespace SekaiEngine
             virtual void kill();
             
             //add sprite and contruct it if it is not alive
-            void addSprite(Sprite_ptr sprite);
+            void addGameObject(GameObject_ptr sprite);
 
             //destroy sprite if it is in the m_sprites and remove it
-            void removeSprite(const Sprite_ptr& sprite);
+            void removeGameObject(const GameObject_ptr& sprite);
 
             const Color& bgColor() const;
             Color& bgColor();
 
         protected:
             Color m_bgColor;
-            std::vector<Sprite_ptr> m_sprites;
+            std::vector<GameObject_ptr> m_sprites;
         };
 
         inline const Color& Scence::bgColor() const

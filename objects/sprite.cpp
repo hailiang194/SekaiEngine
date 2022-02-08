@@ -4,14 +4,14 @@ namespace SekaiEngine
 {
     namespace Object
     {
-        Sprite::Sprite(const float& x, const float& y, const bool& alive)
-            :GameObject(alive), m_x(x), m_y(y), m_observer(nullptr)
+        Sprite::Sprite(const Utility::Vector2D& position, const bool& alive)
+            :GameObject(alive), m_position(position)
         {
 
         }
 
         Sprite::Sprite(const Sprite& sprite)
-            :GameObject(sprite), m_x(sprite.m_x), m_y(sprite.m_y), m_observer(sprite.m_observer)
+            :GameObject(sprite), m_position(sprite.m_position)
         {
 
         }
@@ -19,10 +19,7 @@ namespace SekaiEngine
         Sprite& Sprite::operator=(const Sprite& sprite)
         {
             GameObject::operator=(sprite);
-
-            m_x = sprite.m_x;
-            m_y = sprite.m_y;
-            m_observer = sprite.m_observer;
+            m_position = sprite.m_position;
 
             return (*this);
         }

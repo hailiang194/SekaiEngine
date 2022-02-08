@@ -23,6 +23,11 @@ namespace SekaiEngine
             const bool& alive() const;
             const bool& alive();
 
+            const GameObject_ptr& observer() const;
+            const GameObject_ptr& observer();
+
+            //set new observer
+            void observe(const GameObject_ptr& observer);
             //make object alive and run setup
             void contruct();
 
@@ -43,6 +48,7 @@ namespace SekaiEngine
 
         protected:
             bool m_alive;
+            GameObject_ptr m_observer;
         };
 
         
@@ -55,6 +61,21 @@ namespace SekaiEngine
         inline const bool& GameObject::alive()
         {
             return static_cast<const GameObject&>(*this).alive();
+        }
+
+        inline const GameObject_ptr& GameObject::observer() const
+        {
+            return m_observer;
+        }
+
+        inline const GameObject_ptr& GameObject::observer()
+        {
+            return static_cast<const GameObject&>(*this).observer();
+        }
+
+        inline void GameObject::observe(const GameObject_ptr& observer)
+        {
+            m_observer = observer;
         }
     } // namespace Object
     
