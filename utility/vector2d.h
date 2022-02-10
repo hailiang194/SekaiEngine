@@ -48,7 +48,7 @@ namespace SekaiEngine
 
         inline float& Vector2D::x()
         {
-            return const_cast<float&>(static_cast<const Vector2D>(*this).x());
+            return const_cast<float&>(static_cast<const Vector2D&>(*this).x());
         }
 
         inline const float& Vector2D::y() const
@@ -58,7 +58,7 @@ namespace SekaiEngine
 
         inline float& Vector2D::y()
         {
-            return const_cast<float&>(static_cast<const Vector2D>(*this).y());
+            return const_cast<float&>(static_cast<const Vector2D&>(*this).y());
         }
 
         inline const float Vector2D::distance() const

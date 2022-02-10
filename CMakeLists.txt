@@ -25,6 +25,7 @@ add_subdirectory(core)
 add_subdirectory(utility)
 add_subdirectory(objects)
 add_subdirectory(graphics)
+add_subdirectory(shapes)
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_link_libraries(${PROJECT_NAME} INTERFACE 
@@ -32,6 +33,7 @@ target_link_libraries(${PROJECT_NAME} INTERFACE
   engine_object
   engine_utility
   engine_graphic
+  engine_shape
 )
 
 # I don't know why, but It's work :v

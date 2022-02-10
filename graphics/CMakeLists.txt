@@ -1,10 +1,12 @@
 set(engine_graphic_public_headers
     text.h
+    graphic.h
     shape.h
 )
 
 set(engine_graphic_sources
     text.cpp
+    graphic.cpp
     shape.cpp
 )
 
