@@ -24,7 +24,7 @@ endif()
 add_subdirectory(core)
 add_subdirectory(utility)
 add_subdirectory(objects)
-add_subdirectory(graphic)
+add_subdirectory(graphics)
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_link_libraries(${PROJECT_NAME} INTERFACE 

@@ -16,7 +16,6 @@ namespace SekaiEngine
       Application(const Application& app);
       Application& operator=(const Application& app);
 
-      void setTitle(const std::string& title);
       void start(const SekaiEngine::Object::Scence_ptr& initScence);
     };
   } // namespace Core
