@@ -11,7 +11,7 @@ namespace SekaiEngine
         class Point2D: public Shape
         {
         public:
-            Point2D(const Utility::Vector2D& position = Utility::Vector2D());
+            Point2D(const Utility::Vector2D& position);
             Point2D(const Point2D& point);
             Point2D& operator=(const Point2D& point);
             virtual ~Point2D();
