@@ -41,8 +41,6 @@ namespace SekaiEngine
         {
             return const_cast<Utility::Vector2D&>(static_cast<const Sprite&>(*this).position());
         }
-
-        typedef std::shared_ptr<Sprite> Sprite_ptr;
     } // namespace Object
     
 } // namespace SekaiEngine

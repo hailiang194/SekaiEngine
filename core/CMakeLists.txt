@@ -1,10 +1,12 @@
 set(engine_core_public_headers
     application.h
+    scence_manager.h
     game.h
 )
 
 set(engine_core_sources
     application.cpp
+    scence_manager.cpp
     game.cpp
 )
 

@@ -10,6 +10,11 @@ namespace SekaiEngine
         Game::setSize(width, height);
       }
 
+      void Application::addScence(const std::string& name, Object::Scence* scence)
+      {
+        Game::scences().addScence(name, scence);
+      }
+
       Application::Application(const Application& app)
       {
 
@@ -21,12 +26,20 @@ namespace SekaiEngine
       }
 
 
-      void Application::start(const SekaiEngine::Object::Scence_ptr& initScence)
+      void Application::start(const std::string& initScenceName, std::function<void(const std::exception&)> exceptionCallback)
       {
-        Game::changeScence(initScence);
-        Game::init();
-        Game::start();
-        Game::exit();
+        try
+        {
+          Game::changeScence(initScenceName);
+          Game::init();
+          Game::start();
+          Game::exit();
+        }catch(const std::exception& e)
+        {
+          exceptionCallback(e);
+          Game::exit();
+        }
+
       }
   } // namespace Core
   

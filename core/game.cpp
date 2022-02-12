@@ -11,7 +11,9 @@ namespace SekaiEngine
         }
 
         Game::Game()
-            : m_scence(nullptr), m_state(GameState::CREATE), m_title("SekaiEngine"), m_width(FULL_SIZE), m_height(FULL_SIZE)
+            : m_scence(nullptr), m_state(GameState::CREATE), 
+            m_title("SekaiEngine"), m_width(FULL_SIZE),
+            m_height(FULL_SIZE), m_scences(), m_currentScenceName("")
         {
         }
 
@@ -62,11 +64,22 @@ namespace SekaiEngine
             return m_height;
         }
 
-        void Game::_changeScence(const SekaiEngine::Object::Scence_ptr &changedScence, const bool &destroyOldScence)
+        ScenceManager& Game::_scences()
         {
-            if (changedScence == nullptr)
+            return m_scences;
+        }
+
+        const std::string& Game::_currentScenceName()
+        {
+            return m_currentScenceName;
+        }
+
+        void Game::_changeScence(const std::string& scenceName, const bool& destroyOldScence)
+        {
+            Object::Scence* changedScence = m_scences.getScence(scenceName);
+            if(changedScence == nullptr)
             {
-                throw std::invalid_argument("Can\'t change to the null-pointer scence");
+                throw std::invalid_argument("Can\'t run with to the null-pointer scence");
             }
 
             if (m_scence != nullptr && destroyOldScence)
@@ -74,6 +87,7 @@ namespace SekaiEngine
                 m_scence->destroy();
             }
 
+            m_currentScenceName = scenceName;
             m_scence = changedScence;
             m_scence->contruct();
         }
@@ -136,6 +150,7 @@ namespace SekaiEngine
             if (m_state == GameState::EXIT)
                 return;
 
+            m_scences.clean();
             m_state = GameState::EXIT;
             CloseWindow();
         }

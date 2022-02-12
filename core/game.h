@@ -3,6 +3,7 @@
 
 #include "raylib.h"
 #include "../objects/scence.h"
+#include "scence_manager.h"
 #include <stdexcept>
 
 #define FULL_SIZE 0
@@ -31,7 +32,7 @@ namespace SekaiEngine
         public:
             static Game& instance();
 
-            static void changeScence(const SekaiEngine::Object::Scence_ptr& changedScence, const bool& destroyOldScence = true);
+            static void changeScence(const std::string& scenceName, const bool& destroyOldScence = true);
 
             static void setTitle(const char* title);
             static void setTitle(const std::string& title);
@@ -43,29 +44,37 @@ namespace SekaiEngine
             static const int width();
             static const int height();
 
+            static ScenceManager& scences();
+            static const std::string& currentScenceName();
+
             static void init();
             static void start();
             static void update();
             static void exit();
         private:
-            SekaiEngine::Object::Scence_ptr m_scence;
+            Object::Scence* m_scence;
             GameState m_state;
             std::string m_title;
             int m_width;
             int m_height;
+            ScenceManager m_scences;
+            std::string m_currentScenceName;
 
 
             Game();
             Game(const Game& game) = delete;
             Game& operator=(const Game& game) = delete;
 
-            void _changeScence(const SekaiEngine::Object::Scence_ptr& changedScence, const bool& destroyOldScence = true);
+            void _changeScence(const std::string& scenceName, const bool& destroyOldScence = true);
 
             void _setTitle(const std::string& title);
             const std::string& _title();
             void _setSize(const int& width, const int& height);
             const int _width();
             const int _height();
+            
+            ScenceManager& _scences();
+            const std::string& _currentScenceName();
 
             void _init();
             void _start();
@@ -79,9 +88,9 @@ namespace SekaiEngine
             return game;
         }
 
-        inline void Game::changeScence(const SekaiEngine::Object::Scence_ptr& changedScence, const bool& destroyOldScence)
+        inline void Game::changeScence(const std::string& scenceName, const bool& destroyOldScence)
         {
-            Game::instance()._changeScence(changedScence, destroyOldScence);
+            Game::instance()._changeScence(scenceName, destroyOldScence);
         }
 
         inline void Game::init()
@@ -134,6 +143,16 @@ namespace SekaiEngine
         inline const int Game::height()
         {
             return Game::instance()._height();
+        }
+
+        inline ScenceManager& Game::scences()
+        {
+            return Game::instance()._scences();
+        }
+
+        inline const std::string& Game::currentScenceName()
+        {
+            return Game::instance()._currentScenceName();
         }
     } // namespace Core
     

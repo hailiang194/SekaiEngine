@@ -12,10 +12,6 @@ namespace SekaiEngine
 {
     namespace Object
     {
-        class Scence;
-
-        typedef std::shared_ptr<Scence> Scence_ptr;
-
         class Scence: public GameObject
         {
         public:
@@ -33,17 +29,17 @@ namespace SekaiEngine
             virtual void kill();
             
             //add sprite and contruct it if it is not alive
-            void addGameObject(GameObject_ptr sprite);
+            void addGameObject(GameObject* sprite);
 
             //destroy sprite if it is in the m_sprites and remove it
-            void removeGameObject(const GameObject_ptr& sprite);
+            void removeGameObject(GameObject* sprite);
 
             const Color& bgColor() const;
             Color& bgColor();
 
         protected:
             Color m_bgColor;
-            std::vector<GameObject_ptr> m_sprites;
+            std::vector<GameObject*> m_sprites;
         };
 
         inline const Color& Scence::bgColor() const

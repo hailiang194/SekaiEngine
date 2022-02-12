@@ -8,10 +8,6 @@ namespace SekaiEngine
 {
     namespace Object
     {
-        class GameObject;
-
-        typedef std::shared_ptr<GameObject> GameObject_ptr;
-
         class GameObject
         {
         public:
@@ -23,11 +19,11 @@ namespace SekaiEngine
             const bool& alive() const;
             const bool& alive();
 
-            const GameObject_ptr& observer() const;
-            const GameObject_ptr& observer();
+            const GameObject* observer() const;
+            const GameObject* observer();
 
             //set new observer
-            void observe(const GameObject_ptr& observer);
+            void observe(GameObject* observer);
             //make object alive and run setup
             void contruct();
 
@@ -48,7 +44,7 @@ namespace SekaiEngine
 
         protected:
             bool m_alive;
-            GameObject_ptr m_observer;
+            GameObject* m_observer;
         };
 
         
@@ -63,17 +59,17 @@ namespace SekaiEngine
             return static_cast<const GameObject&>(*this).alive();
         }
 
-        inline const GameObject_ptr& GameObject::observer() const
+        inline const GameObject* GameObject::observer() const
         {
             return m_observer;
         }
 
-        inline const GameObject_ptr& GameObject::observer()
+        inline const GameObject* GameObject::observer()
         {
             return static_cast<const GameObject&>(*this).observer();
         }
 
-        inline void GameObject::observe(const GameObject_ptr& observer)
+        inline void GameObject::observe(GameObject* observer)
         {
             m_observer = observer;
         }

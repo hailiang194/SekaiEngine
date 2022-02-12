@@ -68,7 +68,7 @@ namespace SekaiEngine
             }
         }
 
-        void Scence::addGameObject(GameObject_ptr sprite)
+        void Scence::addGameObject(GameObject* sprite)
         {
             if(sprite == nullptr)
             {
@@ -77,11 +77,11 @@ namespace SekaiEngine
             if(!sprite->alive())
                 sprite->contruct();
 
-            sprite->observe(Scence_ptr(this));
+            sprite->observe(this);
             m_sprites.push_back(sprite);
         }
 
-        void Scence::removeGameObject(const GameObject_ptr& sprite)
+        void Scence::removeGameObject(GameObject* sprite)
         {
             if(sprite == nullptr)
             {

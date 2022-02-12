@@ -4,6 +4,11 @@
 #include "raylib.h"
 #include "game.h"
 #include "../objects/scence.h"
+#include <stdexcept>
+#include <functional>
+#include <iostream>
+
+#define DEFAULT_EXCEPTION_CALLBACK [](const std::exception& e) { std::cout << e.what() << std::endl;}
 
 namespace SekaiEngine
 {
@@ -16,7 +21,9 @@ namespace SekaiEngine
       Application(const Application& app);
       Application& operator=(const Application& app);
 
-      void start(const SekaiEngine::Object::Scence_ptr& initScence);
+      void addScence(const std::string& name, Object::Scence* scence);
+
+      void start(const std::string& initScenceName, std::function<void(const std::exception&)> exceptionCallback = DEFAULT_EXCEPTION_CALLBACK);
     };
   } // namespace Core
   
