@@ -12,7 +12,7 @@ namespace SekaiEngine
 {
     namespace Object
     {
-        class Scence: public GameObject
+        class Scence: public GameObjectsContainer
         {
         public:
             Scence(const Color& bgColor, const bool& alive = false);
@@ -27,12 +27,6 @@ namespace SekaiEngine
             virtual void draw();
 
             virtual void kill();
-            
-            //add sprite and contruct it if it is not alive
-            void addGameObject(GameObject* sprite);
-
-            //destroy sprite if it is in the m_sprites and remove it
-            void removeGameObject(GameObject* sprite);
 
             const Color& bgColor() const;
             Color& bgColor();

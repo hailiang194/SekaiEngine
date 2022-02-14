@@ -4,8 +4,8 @@ namespace SekaiEngine
 {
     namespace Object
     {
-        Sprite::Sprite(const Utility::Vector2D& position, const bool& alive)
-            :GameObject(alive), m_position(position)
+        Sprite::Sprite(const Utility::Vector2D& position, const int& zIndex, const bool& alive)
+            :GameObject(zIndex, alive), m_position(position)
         {
 
         }

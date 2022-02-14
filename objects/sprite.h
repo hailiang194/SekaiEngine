@@ -12,7 +12,7 @@ namespace SekaiEngine
         class Sprite: public GameObject
         {
         public:
-            Sprite(const Utility::Vector2D& position = Utility::Vector2D(), const bool& alive = false);
+            Sprite(const Utility::Vector2D& position = Utility::Vector2D(), const int& zIndex = 0, const bool& alive = false);
             Sprite(const Sprite& sprite);
             Sprite& operator=(const Sprite& sprite);
             virtual ~Sprite();

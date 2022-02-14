@@ -12,7 +12,7 @@ namespace SekaiEngine
         class Text: public Object::GameObject
         {
         public:
-            Text(const std::string& text, const Color& tint, const Utility::Vector2D& position = Utility::Vector2D(), const Font& font = GetFontDefault(), const float& fontSize = 10.0f, const float& spacing = 1.0f, const Utility::Vector2D& origin = {0.0f, 0.0f}, const float& rotation = 0.0f);
+            Text(const std::string& text, const Color& tint, const Utility::Vector2D& position = Utility::Vector2D(), const Font& font = GetFontDefault(), const float& fontSize = 10.0f, const float& spacing = 1.0f, const Utility::Vector2D& origin = {0.0f, 0.0f}, const float& rotation = 0.0f, const int& zIndex = 0);
             Text(const Text& text);
             Text& operator=(const Text& text);
             virtual ~Text();

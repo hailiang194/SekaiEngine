@@ -1,11 +1,13 @@
 set(engine_object_public_headers
     game_object.h
+    # game_objects_container.h
     scence.h
     sprite.h
 )
 
 set(engine_object_sources
     game_object.cpp
+    game_objects_container.cpp
     scence.cpp
     sprite.cpp
 )

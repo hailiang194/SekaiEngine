@@ -3,6 +3,14 @@
 
 #include "raylib.h"
 #include <memory>
+#include <limits>
+#include <list>
+#include <iostream>
+#include <algorithm>
+//#include "game_objects_container.h"
+
+#define BOTTOM_Z_INDEX (int)0x80000000
+#define TOP_Z_INDEX (int)0x7FFFFFFF
 
 namespace SekaiEngine
 {
@@ -11,7 +19,7 @@ namespace SekaiEngine
         class GameObject
         {
         public:
-            GameObject(const bool& alive = false);
+            GameObject(const int& zIndex, const bool& alive = false);
             GameObject(const GameObject& object);
             GameObject& operator=(const GameObject& object);
             virtual ~GameObject();
@@ -21,6 +29,10 @@ namespace SekaiEngine
 
             const GameObject* observer() const;
             const GameObject* observer();
+
+            const int& zIndex() const;
+            const int& zIndex();
+            void setZIndex(const int& zIndex);
 
             //set new observer
             void observe(GameObject* observer);
@@ -44,10 +56,9 @@ namespace SekaiEngine
 
         protected:
             bool m_alive;
+            int m_zIndex;
             GameObject* m_observer;
         };
-
-        
 
         inline const bool& GameObject::alive() const
         {
@@ -73,6 +84,42 @@ namespace SekaiEngine
         {
             m_observer = observer;
         }
+
+        inline const int& GameObject::zIndex() const
+        {
+            return m_zIndex;
+        }
+
+        inline const int& GameObject::zIndex()
+        {
+            return static_cast<const GameObject&>(*this).zIndex();
+        }
+
+        class GameObjectsContainer: public GameObject
+        {
+        public:
+            GameObjectsContainer(const int& zIndex = 0, const bool& alive = false);
+            GameObjectsContainer(const GameObjectsContainer& container);
+            GameObjectsContainer& operator=(const GameObjectsContainer& container);
+            virtual ~GameObjectsContainer();
+
+            void addGameObject(GameObject* child);
+            void removeGameObject(GameObject* child, const bool& isDeleted = true);
+            void clean();
+
+            void updateZIndex(GameObject* updatedObject);
+
+            virtual void setup();
+
+            virtual void update();
+
+            virtual void draw();
+
+            virtual void kill();
+        protected:
+            std::list<GameObject*> m_children;
+            bool m_clean;
+        };
     } // namespace Object
     
 } // namespace SekaiEngine

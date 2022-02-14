@@ -4,8 +4,8 @@ namespace SekaiEngine
 {
     namespace Graphic
     {
-            Text::Text(const std::string& text, const Color& tint, const Utility::Vector2D& position, const Font& font, const float& fontSize, const float& spacing, const Utility::Vector2D& origin, const float& rotation)
-                :Object::GameObject(true), m_content(text), m_tint(tint), m_position(position),
+            Text::Text(const std::string& text, const Color& tint, const Utility::Vector2D& position, const Font& font, const float& fontSize, const float& spacing, const Utility::Vector2D& origin, const float& rotation, const int& zIndex)
+                :Object::GameObject(zIndex, true), m_content(text), m_tint(tint), m_position(position),
                 m_font(font), m_fontSize(fontSize), m_spacing(spacing), 
                 m_origin(origin), m_rotation(rotation)
             {
