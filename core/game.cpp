@@ -10,10 +10,32 @@ namespace SekaiEngine
             Game::update();
         }
 
+        int getMonitorWidth()
+        {
+#if defined(PLATFORM_WEB)
+            return EM_ASM_INT({
+                return window.innerWidth;
+                });
+#else
+            return 0;
+#endif
+        }
+
+        int getMonitorHeight()
+        {
+#if defined(PLATFORM_WEB)
+            return EM_ASM_INT({
+                return window.innerHeight;
+                });
+#else
+	        return 0;
+#endif
+        }
+
         Game::Game()
             : m_scence(nullptr), m_state(GameState::CREATE), 
-            m_title("SekaiEngine"), m_width(FULL_SIZE),
-            m_height(FULL_SIZE), m_scences(), m_currentScenceName("")
+            m_title("SekaiEngine"), m_width(getMonitorWidth()),
+            m_height(getMonitorHeight()), m_scences(), m_currentScenceName("")
         {
         }
 
@@ -50,18 +72,12 @@ namespace SekaiEngine
 
         const int Game::_width()
         {
-            if(m_width == FULL_SIZE)
-                return GetScreenWidth();
-            
-            return m_width;
+            return GetScreenWidth();
         }
 
         const int Game::_height()
         {
-            if(m_height == FULL_SIZE)
-                return GetScreenHeight();
-                
-            return m_height;
+            return GetScreenHeight();
         }
 
         ScenceManager& Game::_scences()

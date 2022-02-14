@@ -17,7 +17,7 @@ namespace SekaiEngine
     class Application
     {
     public:
-      Application(const std::string& title = "SekaiTemplate", const int& width = FULL_SIZE, const int& height = FULL_SIZE);
+      Application(const std::string& title = "SekaiTemplate", const int& width = getMonitorWidth(), const int& height = getMonitorHeight());
       Application(const Application& app);
       Application& operator=(const Application& app);
 

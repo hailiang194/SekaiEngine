@@ -38,6 +38,10 @@ namespace SekaiEngine
             }
 
             child->observe(this);
+            if(m_alive)
+            {
+                
+            }
 
             if(m_children.size() == 0 || m_children.back()->zIndex() <= child->zIndex())
             {

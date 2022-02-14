@@ -6,8 +6,6 @@
 #include "scence_manager.h"
 #include <stdexcept>
 
-#define FULL_SIZE 0
-
 #if defined(PLATFORM_WEB)
     #include <emscripten/emscripten.h>
 #endif
@@ -18,6 +16,9 @@ namespace SekaiEngine
     {
 
         void main_loop();
+
+        int getMonitorWidth();
+        int getMonitorHeight();
 
         enum class GameState
         {

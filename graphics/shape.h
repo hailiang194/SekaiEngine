@@ -4,11 +4,11 @@
 #include "graphic.h"
 
 //When you have new shape please write the flag here
-#define RECTANGLE_SHAPE (1 << 3)
-#define CIRCLE_SHAPE    (1 << 2)
-#define LINE_SHAPE      (1 << 1)
-#define POINT_SHAPE     (1 << 0)
-#define UNDEFINED_SHAPE 0
+#define RECTANGLE_SHAPE 0x8
+#define CIRCLE_SHAPE    0x4
+#define LINE_SHAPE      0x2
+#define POINT_SHAPE     0x1
+#define UNDEFINED_SHAPE 0x0
 
 namespace SekaiEngine
 {
@@ -18,7 +18,7 @@ namespace SekaiEngine
         class Shape: public Graphic
         {
         public:
-            Shape(const ShapeFlag& SHAPE_FLAG = UNDEFINED_SHAPE);
+            Shape(const ShapeFlag& SHAPE_FLAG);
             Shape(const Shape& shape);
             Shape& operator=(const Shape& shape);
             virtual ~Shape();
