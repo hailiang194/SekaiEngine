@@ -109,13 +109,21 @@ namespace SekaiEngine
 
             void updateZIndex(GameObject* updatedObject);
 
-            virtual void setup();
+            void setup() override;
 
-            virtual void update();
+            virtual void setupThis() = 0;
 
-            virtual void draw();
+            void update() override;
 
-            virtual void kill();
+            virtual void updateThis() = 0;
+
+            void draw() override;
+
+            virtual void drawThis() = 0;
+
+            void kill() override;
+
+            virtual void killThis() = 0;
         protected:
             std::list<GameObject*> m_children;
             bool m_clean;

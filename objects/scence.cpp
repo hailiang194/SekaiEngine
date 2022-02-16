@@ -5,13 +5,13 @@ namespace SekaiEngine
     namespace Object
     {
         Scence::Scence(const Color& bgColor, const bool& alive)
-            :GameObjectsContainer(BOTTOM_Z_INDEX, true), m_bgColor(bgColor), m_sprites()
+            :GameObjectsContainer(BOTTOM_Z_INDEX, true), m_bgColor(bgColor)
         {
 
         }
 
         Scence::Scence(const Scence& scence)
-            :GameObjectsContainer(scence), m_bgColor(scence.m_bgColor), m_sprites(scence.m_sprites)
+            :GameObjectsContainer(scence), m_bgColor(scence.m_bgColor)
         {
             
         }
@@ -19,7 +19,6 @@ namespace SekaiEngine
         {
             GameObjectsContainer::operator=(scence);
             m_bgColor = scence.m_bgColor;
-            m_sprites = scence.m_sprites;
             return (*this);
         }
 
@@ -28,26 +27,21 @@ namespace SekaiEngine
 
         }
 
-        void Scence::setup()
+        void Scence::setupThis()
         {
-            GameObjectsContainer::setup();
         }
 
-        void Scence::update()
+        void Scence::updateThis()
         {
-            GameObjectsContainer::update();
         }
 
-        void Scence::draw()
+        void Scence::drawThis()
         {
             ClearBackground(m_bgColor);
-            GameObjectsContainer::draw();
         }
 
-        void Scence::kill()
+        void Scence::killThis()
         {
-            GameObjectsContainer::kill();
-
         }
     } // namespace Object
     

@@ -38,9 +38,9 @@ namespace SekaiEngine
             }
 
             child->observe(this);
-            if(m_alive)
+            if(m_alive && !child->alive())
             {
-                
+                child->contruct();
             }
 
             if(m_children.size() == 0 || m_children.back()->zIndex() <= child->zIndex())
@@ -86,10 +86,16 @@ namespace SekaiEngine
                 return;
             }
 
-            m_children.erase(foundChildIter);
+            
             if((*foundChildIter) != nullptr && isDeleted)
             {
-                delete (*foundChildIter);
+                delete child;
+            }
+            m_children.erase(foundChildIter);
+
+            if(m_children.size() == 0)
+            {
+                m_clean = true;
             }
         }
 
@@ -153,9 +159,11 @@ namespace SekaiEngine
         void GameObjectsContainer::setup()
         {
             GameObject::setup();
+            setupThis();
             for(auto child = m_children.begin(); child != m_children.end(); ++child)
             {
-                (*child)->setup();
+                if(!(*child)->alive())
+                    (*child)->contruct();
             }
 
         }
@@ -163,6 +171,7 @@ namespace SekaiEngine
         void GameObjectsContainer::update()
         {
             GameObject::update();
+            updateThis();
             for(auto child = m_children.begin(); child != m_children.end(); ++child)
             {
                 if((*child)->alive())
@@ -173,6 +182,7 @@ namespace SekaiEngine
         void GameObjectsContainer::draw()
         {
             GameObject::draw();
+            drawThis();
             for(auto child = m_children.begin(); child != m_children.end(); ++child)
             {
                 if((*child)->alive())
@@ -183,9 +193,11 @@ namespace SekaiEngine
         void GameObjectsContainer::kill()
         {
             GameObject::kill();
+            killThis();
             for(auto child = m_children.begin(); child != m_children.end(); ++child)
             {
-                (*child)->kill();
+                if((*child)->alive())
+                    (*child)->destroy();
             }
         }
     } // namespace Object

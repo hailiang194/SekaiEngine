@@ -20,20 +20,19 @@ namespace SekaiEngine
             Scence& operator=(const Scence& scence);
             virtual ~Scence();
 
-            virtual void setup();
+            virtual void setupThis();
 
-            virtual void update();
+            virtual void updateThis();
 
-            virtual void draw();
+            virtual void drawThis();
 
-            virtual void kill();
+            virtual void killThis();
 
             const Color& bgColor() const;
             Color& bgColor();
 
         protected:
             Color m_bgColor;
-            std::vector<GameObject*> m_sprites;
         };
 
         inline const Color& Scence::bgColor() const
