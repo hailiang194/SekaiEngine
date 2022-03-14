@@ -1,13 +1,13 @@
 set(engine_graphic_public_headers
-    text.h
     graphic.h
     shape.h
+    drawable.h
 )
 
 set(engine_graphic_sources
-    text.cpp
     graphic.cpp
     shape.cpp
+    drawable.cpp
 )
 
 add_library(engine_graphic ${engine_graphic_public_headers} ${engine_graphic_sources})

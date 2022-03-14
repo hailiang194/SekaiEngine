@@ -1,26 +1,6 @@
 project(SekaiEngine VERSION 0.0.1)
 set(CMAKE_CXX_STANDARD 11)
 
-# Dependencies
-# find_package(raylib 4.0.0 QUIET) # QUIET or REQUIRED
-# if (NOT raylib_FOUND) # If there's none, fetch and build raylib
-#   include(FetchContent)
-#   FetchContent_Declare(
-#     raylib
-#     # URL https://github.com/raysan5/raylib/archive/refs/tags/4.0.0.tar.gz
-#     GIT_REPOSITORY https://github.com/raysan5/raylib.git 
-#     GIT_TAG a56b8cd2b7e48855ef01a7f60b8e9bd612fda4b8 #4.0.0
-
-#   )
-#   FetchContent_GetProperties(raylib)
-#   if (NOT raylib_POPULATED) # Have we downloaded raylib yet?
-#     set(FETCHCONTENT_QUIET NO)
-#     FetchContent_Populate(raylib)
-#     set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
-#     add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
-#   endif()
-# endif()
-
 add_subdirectory(raylib)
 
 add_subdirectory(core)
@@ -28,6 +8,7 @@ add_subdirectory(utility)
 add_subdirectory(objects)
 add_subdirectory(graphics)
 add_subdirectory(shapes)
+add_subdirectory(drawable)
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_link_libraries(${PROJECT_NAME} INTERFACE 
@@ -36,6 +17,7 @@ target_link_libraries(${PROJECT_NAME} INTERFACE
   engine_utility
   engine_graphic
   engine_shape
+  engine_drawable
 )
 
 # I don't know why, but It's work :v

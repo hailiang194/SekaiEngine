@@ -30,7 +30,7 @@ namespace SekaiEngine
 
         void ScenceManager::addScence(const std::string& name, Object::Scence* scence)
         {
-            if(m_scenceMap.size() > 0 && m_scenceMap.find(name) == m_scenceMap.end())
+            if(m_scenceMap.size() > 0 && m_scenceMap.find(name) != m_scenceMap.end())
             {
                 throw std::invalid_argument(name + " has been existed");
             }
