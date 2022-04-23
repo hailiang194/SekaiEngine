@@ -8,7 +8,6 @@ add_subdirectory(utility)
 add_subdirectory(objects)
 add_subdirectory(graphics)
 add_subdirectory(shapes)
-add_subdirectory(drawable)
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_link_libraries(${PROJECT_NAME} INTERFACE 
@@ -17,7 +16,6 @@ target_link_libraries(${PROJECT_NAME} INTERFACE
   engine_utility
   engine_graphic
   engine_shape
-  engine_drawable
 )
 
 # I don't know why, but It's work :v
