@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(engine_include_dir "${CMAKE_CURRENT_BINARY_DIR}/include" CACHE STRING "Sekai Engine include headers path")
 
-add_subdirectory(raylib)
+add_subdirectory(vendors/raylib)
 
 add_subdirectory(src/core)
 add_subdirectory(src/utility)
