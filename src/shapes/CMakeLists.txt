@@ -1,11 +1,13 @@
 set(engine_shapes_public_headers
     point.h
     circle.h
+    line.h
 )
 
 set(engine_shapes_public_sources
     point.cpp
     circle.cpp
+    line.h
 )
 
 add_library(engine_shape ${engine_shapes_public_headers} ${engine_shapes_public_sources})
