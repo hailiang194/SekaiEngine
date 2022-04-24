@@ -8,6 +8,7 @@ namespace SekaiEngine
       {
         Game::setTitle(title);
         Game::setSize(width, height);
+        Game::init();
       }
 
       void Application::addScence(const std::string& name, Object::Scence* scence)
@@ -31,7 +32,6 @@ namespace SekaiEngine
         try
         {
           Game::changeScence(initScenceName);
-          Game::init();
           Game::start();
           Game::exit();
         }catch(const std::exception& e)
