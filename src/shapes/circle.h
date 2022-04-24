@@ -21,14 +21,13 @@ namespace SekaiEngine
 
             const float& radius() const;
             float& radius();
-        protected:
-            Utility::Vector2D m_center;
-            float m_radius;
+
+            const Transform2D drawGraphic(const Transform2D* parent = nullptr) override;
         };
 
         inline const Utility::Vector2D& Circle2D::center() const
         {
-            return m_center;
+            return m_self.position();
         }
 
         inline Utility::Vector2D& Circle2D::center()
@@ -38,7 +37,7 @@ namespace SekaiEngine
 
         inline const float& Circle2D::radius() const
         {
-            return m_radius;
+            return m_self.scale();
         }
 
         inline float& Circle2D::radius()

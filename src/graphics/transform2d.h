@@ -45,6 +45,8 @@ namespace SekaiEngine
             Color m_color;
         };
 
+        const Transform2D getTransformedValues(const Transform2D& parent, const Transform2D& self);
+
         inline const Utility::Vector2D& SekaiEngine::Graphic::Transform2D::position() const
         {
             return m_position;

@@ -18,16 +18,18 @@ namespace SekaiEngine
         class Shape: public Graphic
         {
         public:
-            Shape(const ShapeFlag& SHAPE_FLAG);
+            Shape(const ShapeFlag& SHAPE_FLAG, const Transform2D& self = Transform2D());
             Shape(const Shape& shape);
             Shape& operator=(const Shape& shape);
             virtual ~Shape();
 
             const ShapeFlag& SHAPE_FLAG() const;
             const ShapeFlag& SHAPE_FLAG();
+            
+            virtual const Transform2D drawGraphic(const Transform2D* parent = nullptr) = 0;
 
         protected:
-            const ShapeFlag m_SHAPE_FLAG;
+            ShapeFlag m_SHAPE_FLAG;
         };
 
         inline const ShapeFlag& Shape::SHAPE_FLAG() const

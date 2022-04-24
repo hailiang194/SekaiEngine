@@ -18,13 +18,14 @@ namespace SekaiEngine
 
             const Utility::Vector2D& position() const;
             Utility::Vector2D& position();
-        protected:
-            Utility::Vector2D m_position;
+
+            const Transform2D drawGraphic(const Transform2D* parent = nullptr) override;
+        
         };
 
         inline const Utility::Vector2D& Point2D::position() const
         {
-            return m_position;
+            return m_self.position();
         }
 
         inline Utility::Vector2D& Point2D::position()
