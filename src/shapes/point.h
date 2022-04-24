@@ -2,7 +2,6 @@
     #define _SEKAI_ENGINE_GRAPHIC_POINT_SHAPE_H_
 
 #include "../graphics/shape.h"
-#include "../utility/vector2d.h"
 
 namespace SekaiEngine
 {
