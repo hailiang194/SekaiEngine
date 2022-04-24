@@ -10,3 +10,4 @@ set(engine_shapes_public_sources
 
 add_library(engine_shape ${engine_shapes_public_headers} ${engine_shapes_public_sources})
 target_link_libraries(engine_shape PUBLIC raylib)
+file(COPY ${engine_shapes_public_headers} DESTINATION "${engine_include_dir}/${PROJECT_NAME}/shapes")

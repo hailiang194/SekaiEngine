@@ -12,4 +12,5 @@ set(engine_core_sources
 
 add_library(engine_core STATIC ${engine_core_public_headers} ${engine_core_sources})
 target_link_libraries(engine_core PUBLIC raylib)
+file(COPY ${engine_core_public_headers} DESTINATION "${engine_include_dir}/${PROJECT_NAME}/core")
 

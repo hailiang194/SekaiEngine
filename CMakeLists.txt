@@ -1,13 +1,15 @@
 project(SekaiEngine VERSION 0.0.1)
 set(CMAKE_CXX_STANDARD 11)
 
+set(engine_include_dir "${CMAKE_CURRENT_BINARY_DIR}/include" CACHE STRING "Sekai Engine include headers path")
+
 add_subdirectory(raylib)
 
-add_subdirectory(core)
-add_subdirectory(utility)
-add_subdirectory(objects)
-add_subdirectory(graphics)
-add_subdirectory(shapes)
+add_subdirectory(src/core)
+add_subdirectory(src/utility)
+add_subdirectory(src/objects)
+add_subdirectory(src/graphics)
+add_subdirectory(src/shapes)
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_link_libraries(${PROJECT_NAME} INTERFACE 
@@ -17,9 +19,4 @@ target_link_libraries(${PROJECT_NAME} INTERFACE
   engine_graphic
   engine_shape
 )
-
-# I don't know why, but It's work :v
-target_include_directories(engine_core PUBLIC ${CMAKE_SOURCE_DIR})
-target_include_directories(engine_object PUBLIC ${CMAKE_SOURCE_DIR})
-
 
