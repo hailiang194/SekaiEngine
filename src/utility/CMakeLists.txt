@@ -8,6 +8,6 @@ set(engine_utility_sources
     math.cpp
 )
 
-add_library(engine_utility STATIC ${engine_utility_public_headers} ${engine_utility_sources})
+add_library(engine_utility OBJECT ${engine_utility_public_headers} ${engine_utility_sources})
 target_link_libraries(engine_utility PRIVATE raylib)
 file(COPY ${engine_utility_public_headers} DESTINATION "${engine_include_dir}/${PROJECT_NAME}/utility")

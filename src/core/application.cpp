@@ -1,6 +1,6 @@
 #include "./application.h"
 
-namespace SekaiEngine
+namespace SekaiEngine 
 {
   namespace Core
   {
