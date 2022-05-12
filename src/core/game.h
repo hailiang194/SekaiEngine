@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include "../objects/scence.h"
 #include "scence_manager.h"
+#include "asset-manager.h"
 #include <stdexcept>
 
 #if defined(PLATFORM_WEB)
@@ -48,6 +49,8 @@ namespace SekaiEngine
             static ScenceManager& scences();
             static const std::string& currentScenceName();
 
+            static TexturesManager& textures();
+
             static void init();
             static void start();
             static void update();
@@ -60,6 +63,7 @@ namespace SekaiEngine
             int m_height;
             ScenceManager m_scences;
             std::string m_currentScenceName;
+            TexturesManager m_textures;
 
 
             Game();
@@ -76,6 +80,8 @@ namespace SekaiEngine
             
             ScenceManager& _scences();
             const std::string& _currentScenceName();
+
+            TexturesManager& _textures();
 
             void _init();
             void _start();
@@ -154,6 +160,11 @@ namespace SekaiEngine
         inline const std::string& Game::currentScenceName()
         {
             return Game::instance()._currentScenceName();
+        }
+
+        inline TexturesManager& Game::textures()
+        {
+            return Game::instance()._textures();
         }
     } // namespace Core
     

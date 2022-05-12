@@ -35,7 +35,7 @@ namespace SekaiEngine
         Game::Game()
             : m_scence(nullptr), m_state(GameState::CREATE), 
             m_title("SekaiEngine"), m_width(getMonitorWidth()),
-            m_height(getMonitorHeight()), m_scences(), m_currentScenceName("")
+            m_height(getMonitorHeight()), m_scences(), m_currentScenceName(""), m_textures()
         {
         }
 
@@ -90,6 +90,7 @@ namespace SekaiEngine
             return m_currentScenceName;
         }
 
+
         void Game::_changeScence(const std::string& scenceName, const bool& destroyOldScence)
         {
             Object::Scence* changedScence = m_scences.getScence(scenceName);
@@ -106,6 +107,11 @@ namespace SekaiEngine
             m_currentScenceName = scenceName;
             m_scence = changedScence;
             m_scence->contruct();
+        }
+
+        TexturesManager& Game::_textures()
+        {
+            return m_textures;
         }
 
         void Game::_init()
@@ -167,6 +173,7 @@ namespace SekaiEngine
                 return;
 
             m_scences.clean();
+            m_textures.unload();
             m_state = GameState::EXIT;
             CloseWindow();
         }

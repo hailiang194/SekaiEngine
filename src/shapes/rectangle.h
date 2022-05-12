@@ -29,6 +29,36 @@ namespace SekaiEngine
             float m_width;
             float m_height;
         };
+
+        inline const Utility::Vector2D& Rectangle::position() const
+        {
+            return m_self.position();
+        }
+
+        inline Utility::Vector2D& Rectangle::position()
+        {
+            return const_cast<Utility::Vector2D&>(static_cast<const Rectangle&>(*this).position());
+        }
+
+        inline const float& Rectangle::width() const
+        {
+            return m_width;
+        }
+
+        inline float& Rectangle::width()
+        {
+            return const_cast<float&>(static_cast<const Rectangle&>(*this).width());
+        }
+
+        inline const float& Rectangle::height() const
+        {
+            return m_height;
+        }
+
+        inline float& Rectangle::height()
+        {
+            return const_cast<float&>(static_cast<const Rectangle&>(*this).height());
+        }
     } // namespace Graphic
     
 } // namespace SekaiEngine
