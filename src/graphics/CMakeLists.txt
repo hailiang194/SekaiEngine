@@ -2,12 +2,14 @@ set(engine_graphic_public_headers
     graphic.h
     shape.h
     transform2d.h
+    texture.h
 )
 
 set(engine_graphic_sources
     graphic.cpp
     shape.cpp
     transform2d.cpp
+    texture.cpp
 )
 
 add_library(engine_graphic OBJECT ${engine_graphic_public_headers} ${engine_graphic_sources})
