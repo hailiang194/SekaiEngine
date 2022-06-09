@@ -5,6 +5,7 @@
 #include "../objects/scence.h"
 #include "scence_manager.h"
 #include "asset-manager.h"
+#include "../input/input-manager.h"
 #include <stdexcept>
 
 #if defined(PLATFORM_WEB)
@@ -51,6 +52,8 @@ namespace SekaiEngine
 
             static TexturesManager& textures();
 
+            static Input::InputManager& input();
+
             static void init();
             static void start();
             static void update();
@@ -64,6 +67,7 @@ namespace SekaiEngine
             ScenceManager m_scences;
             std::string m_currentScenceName;
             TexturesManager m_textures;
+            Input::InputManager m_input;
 
 
             Game();
@@ -83,6 +87,8 @@ namespace SekaiEngine
 
             TexturesManager& _textures();
 
+            Input::InputManager& _input();
+
             void _init();
             void _start();
             void _update();
@@ -98,6 +104,11 @@ namespace SekaiEngine
         inline void Game::changeScence(const std::string& scenceName, const bool& destroyOldScence)
         {
             Game::instance()._changeScence(scenceName, destroyOldScence);
+        }
+
+        inline Input::InputManager& Game::input()
+        {
+            return Game::instance()._input();
         }
 
         inline void Game::init()

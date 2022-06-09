@@ -35,7 +35,8 @@ namespace SekaiEngine
         Game::Game()
             : m_scence(nullptr), m_state(GameState::CREATE), 
             m_title("SekaiEngine"), m_width(getMonitorWidth()),
-            m_height(getMonitorHeight()), m_scences(), m_currentScenceName(""), m_textures()
+            m_height(getMonitorHeight()), m_scences(), m_currentScenceName(""), m_textures(),
+            m_input()
         {
         }
 
@@ -114,6 +115,11 @@ namespace SekaiEngine
             return m_textures;
         }
 
+        Input::InputManager& Game::_input()
+        {
+            return m_input;
+        }
+
         void Game::_init()
         {
             if (m_state != GameState::CREATE)
@@ -154,16 +160,18 @@ namespace SekaiEngine
 
         void Game::_update()
         {
-            BeginDrawing();
 
             if (m_scence == nullptr)
             {
                 throw std::runtime_error("Can\'t update null-pointer scence");
             }
 
-            m_scence->update();
-            m_scence->draw();
+            m_input.update();
+         
 
+            m_scence->update();
+            BeginDrawing();
+            m_scence->draw();
             EndDrawing();
         }
 
@@ -174,6 +182,7 @@ namespace SekaiEngine
 
             m_scences.clean();
             m_textures.unload();
+            m_input.destroy();
             m_state = GameState::EXIT;
             CloseWindow();
         }

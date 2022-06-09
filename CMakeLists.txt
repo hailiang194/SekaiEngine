@@ -11,6 +11,7 @@ add_subdirectory(src/utility)
 add_subdirectory(src/objects)
 add_subdirectory(src/graphics)
 add_subdirectory(src/shapes)
+add_subdirectory(src/input)
 
 # add_library(${PROJECT_NAME} INTERFACE)
 # target_link_libraries
@@ -19,7 +20,8 @@ $<TARGET_OBJECTS:engine_core>
 $<TARGET_OBJECTS:engine_object>  
 $<TARGET_OBJECTS:engine_utility>  
 $<TARGET_OBJECTS:engine_graphic>  
-$<TARGET_OBJECTS:engine_shape>  
+$<TARGET_OBJECTS:engine_shape>
+$<TARGET_OBJECTS:engine_input> 
 )
 
 target_link_libraries(${PROJECT_NAME} raylib)
