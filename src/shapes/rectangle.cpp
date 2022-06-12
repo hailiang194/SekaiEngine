@@ -30,18 +30,27 @@ namespace SekaiEngine
 
         }
 
-        const Transform2D Rectangle::drawGraphic(const Transform2D* parent)
+        void Rectangle::computeTransform_()
         {
-            Transform2D transformed = (parent == nullptr) ? m_self : getTransformedValues(*parent, m_self);
+            Shape::computeTransform_();
+        }
 
-            DrawRectanglePro(
-                {transformed.position().x(), transformed.position().y(), transformed.scale() * m_width, transformed.scale() * m_height},
-                transformed.origin().toRaylibVector(),
-                transformed.rotation(),
-                transformed.color()
-            );
-            
-            return transformed;
+        void Rectangle::render_()
+        {
+            if(m_transformed.lineThick() == NO_LINE_THICK)
+                DrawRectanglePro(
+                    {m_transformed.position().x(), m_transformed.position().y(), m_transformed.scale() * m_width, m_transformed.scale() * m_height},
+                    m_transformed.origin().toRaylibVector(),
+                    m_transformed.rotation(),
+                    m_transformed.color()
+                );
+            else //Bug if rotation
+                DrawRectangleLinesEx(
+                    {m_transformed.position().x(), m_transformed.position().y(), m_transformed.scale() * m_width, m_transformed.scale() * m_height},
+                    m_transformed.lineThick(),
+                    m_transformed.color()
+                );
+                
         }
     } // namespace Graphic
     

@@ -24,7 +24,9 @@ namespace SekaiEngine
             const float& height() const;
             float& height();
 
-            const Transform2D drawGraphic(const Transform2D* parent = nullptr); 
+        protected:
+            void computeTransform_() override;
+            void render_() override;
         private:
             float m_width;
             float m_height;

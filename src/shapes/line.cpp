@@ -29,15 +29,16 @@ namespace SekaiEngine
 
         }
 
-        const Transform2D Line::drawGraphic(const Transform2D* parent)
+        void Line::computeTransform_()
         {
-            Transform2D transformed = (parent == nullptr) ? m_self : getTransformedValues(*parent, m_self);
+            Shape::computeTransform_();
+        }
 
-            Utility::Vector2D tfEndPoint = (m_endPoint + m_self.position() * -1) * m_self.scale() + m_self.position();
+        void Line::render_()
+        {
+            Utility::Vector2D tfEndPoint = (m_endPoint + m_self.position() * -1) * m_transformed.scale() + m_transformed.position();
 
-            DrawLineV(m_self.position().toRaylibVector(), tfEndPoint.toRaylibVector(), m_self.color());
-
-            return transformed;
+            DrawLineV(m_transformed.position().toRaylibVector(), tfEndPoint.toRaylibVector(), m_transformed.color());
         }
     } // namespace Graphic
     

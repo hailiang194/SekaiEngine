@@ -13,13 +13,13 @@ namespace SekaiEngine
             Point2D(const Utility::Vector2D& position);
             Point2D(const Point2D& point);
             Point2D& operator=(const Point2D& point);
-            virtual ~Point2D();
+            ~Point2D();
 
             const Utility::Vector2D& position() const;
             Utility::Vector2D& position();
-
-            const Transform2D drawGraphic(const Transform2D* parent = nullptr) override;
-        
+        protected:
+            void computeTransform_() override;
+            void render_() override;        
         };
 
         inline const Utility::Vector2D& Point2D::position() const

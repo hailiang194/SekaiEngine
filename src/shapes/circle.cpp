@@ -27,13 +27,17 @@ namespace SekaiEngine
 
         }
 
-        const Transform2D Circle2D::drawGraphic(const Transform2D* parent)
+        void Circle2D::computeTransform_()
         {
-            Transform2D transformed = (parent == nullptr) ? m_self : getTransformedValues(*parent, m_self);
+            Shape::computeTransform_();
+        }
 
-            DrawCircleV(transformed.position().toRaylibVector(), transformed.scale(), transformed.color());
-            
-            return transformed;
+        void Circle2D::render_()
+        {
+            if(m_transformed.lineThick() == NO_LINE_THICK)
+                DrawCircleV(m_transformed.position().toRaylibVector(), m_transformed.scale(), m_transformed.color());
+            else
+                DrawRing(m_transformed.position().toRaylibVector(), m_transformed.scale(), m_transformed.scale() - m_transformed.lineThick(), 0, 360, 36, m_transformed.color());
         }
     } // namespace Graphic
     

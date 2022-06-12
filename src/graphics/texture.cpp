@@ -57,23 +57,26 @@ namespace SekaiEngine
         {
         }
 
-        const Transform2D EngineTexture::drawGraphic(const Transform2D* parent)
-        {
-            Transform2D transformed = (parent == nullptr) ? m_self : getTransformedValues(*parent, m_self);
 
+        void EngineTexture::render_()
+        {
             DrawTexturePro(
                 *m_texture,
                 {m_source.position().x(), m_source.position().y(), m_source.width(), m_source.height()},
-                {transformed.position().x(), transformed.position().y(), 
-                 transformed.scale() * m_scaleX * m_source.width(),
-                 transformed.scale() * m_scaleY * m_source.height()
+                {m_transformed.position().x(), m_transformed.position().y(), 
+                 m_transformed.scale() * m_scaleX * m_source.width(),
+                 m_transformed.scale() * m_scaleY * m_source.height()
                 },
-                transformed.origin().toRaylibVector(),
-                transformed.rotation(),
-                transformed.color()
+                m_transformed.origin().toRaylibVector(),
+                m_transformed.rotation(),
+                m_transformed.color()
             );
             
-            return transformed;
+        }
+
+        void EngineTexture::computeTransform_()
+        {
+            Graphic::computeTransform_();
         }
     } // namespace Graphic
     

@@ -34,8 +34,10 @@ namespace SekaiEngine
             const Rectangle& source() const;
             Rectangle& source(); 
 
-            const Transform2D drawGraphic(const Transform2D* parent = nullptr) override;
         protected:
+            virtual void computeTransform_() override;
+            void render_() override;
+            
             const Texture2D* m_texture;
             Rectangle m_source;
             float m_scaleX;

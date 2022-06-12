@@ -15,14 +15,14 @@ namespace SekaiEngine
             Line(const Line& line);
             Line& operator=(const Line& line);
             ~Line();
-
-            const Transform2D drawGraphic(const Transform2D* parent = nullptr);
-
             const Utility::Vector2D& startPoint() const;
             Utility::Vector2D& startPoint();
 
             const Utility::Vector2D& endPoint() const;
             Utility::Vector2D& endPoint();
+        protected:
+            void computeTransform_() override;
+            void render_() override;
         private:
             Utility::Vector2D m_endPoint;
         };

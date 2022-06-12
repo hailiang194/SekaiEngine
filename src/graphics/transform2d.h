@@ -4,6 +4,10 @@
 #include "raylib.h"
 #include "../utility/vector2d.h"
 
+#define NO_LINE_THICK 0
+#define DEBUG_LINE_THICK 1
+#define DEBUG_COLOR RED
+
 namespace SekaiEngine
 {
     namespace Graphic
@@ -16,7 +20,8 @@ namespace SekaiEngine
                 const float& scale = 1.0f,
                 const Utility::Vector2D& origin = Utility::Vector2D(),
                 const float& rotation = 0.0f,
-                const Color& color = WHITE
+                const Color& color = WHITE,
+                const int& lineThick = NO_LINE_THICK
             );
             Transform2D(const Transform2D& transform);
             Transform2D& operator=(const Transform2D& transfrom);
@@ -37,12 +42,16 @@ namespace SekaiEngine
             const Color& color() const;
             Color& color();
 
+            const int& lineThick() const;
+            int& lineThick();
+
         protected:
             Utility::Vector2D m_position;
             float m_scale;
             Utility::Vector2D m_origin;
             float m_rotation;
             Color m_color;
+            int m_lineThick;
         };
 
         const Transform2D getTransformedValues(const Transform2D& parent, const Transform2D& self);
@@ -94,6 +103,16 @@ namespace SekaiEngine
         inline Color& Transform2D::color()
         {
             return const_cast<Color&>(static_cast<const Transform2D&>(*this).color());
+        }
+
+        const int& Transform2D::lineThick() const
+        {
+            return m_lineThick;
+        }
+
+        int& Transform2D::lineThick()
+        {
+            return const_cast<int&>(static_cast<const Transform2D&>(*this).lineThick());
         }
 
     } // namespace Graphic

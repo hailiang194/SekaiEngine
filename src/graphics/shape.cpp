@@ -23,6 +23,11 @@ namespace SekaiEngine
                 return (*this);
             }
 
+            void Shape::computeTransform_()
+            {
+                Graphic::computeTransform_();
+            }
+
             Shape::~Shape()
             {
 

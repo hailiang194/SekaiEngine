@@ -28,13 +28,14 @@ namespace SekaiEngine
             
         }
 
-        const Transform2D Point2D::drawGraphic(const Transform2D* parent)
+        void Point2D::computeTransform_()
         {
-            Transform2D transformed = (parent == nullptr) ? m_self : getTransformedValues(*parent, m_self);
+            Shape::computeTransform_();
+        }
 
-            DrawPixelV(transformed.position().toRaylibVector(), transformed.color());
-
-            return transformed;
+        void Point2D::render_()
+        {
+            DrawPixelV(m_transformed.position().toRaylibVector(), m_transformed.color());
         }
     } // namespace Graphic
     

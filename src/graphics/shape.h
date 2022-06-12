@@ -25,10 +25,12 @@ namespace SekaiEngine
 
             const ShapeFlag& SHAPE_FLAG() const;
             const ShapeFlag& SHAPE_FLAG();
-            
-            virtual const Transform2D drawGraphic(const Transform2D* parent = nullptr) = 0;
 
         protected:
+            virtual void computeTransform_();
+            virtual void render_() = 0;
+
+
             ShapeFlag m_SHAPE_FLAG;
         };
 

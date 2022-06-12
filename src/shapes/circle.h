@@ -20,8 +20,10 @@ namespace SekaiEngine
 
             const float& radius() const;
             float& radius();
-
-            const Transform2D drawGraphic(const Transform2D* parent = nullptr) override;
+        
+        protected:
+            void computeTransform_() override;
+            void render_() override;
         };
 
         inline const Utility::Vector2D& Circle2D::center() const
