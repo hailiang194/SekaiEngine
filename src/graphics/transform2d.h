@@ -105,12 +105,12 @@ namespace SekaiEngine
             return const_cast<Color&>(static_cast<const Transform2D&>(*this).color());
         }
 
-        const int& Transform2D::lineThick() const
+        inline const int& Transform2D::lineThick() const
         {
             return m_lineThick;
         }
 
-        int& Transform2D::lineThick()
+        inline int& Transform2D::lineThick()
         {
             return const_cast<int&>(static_cast<const Transform2D&>(*this).lineThick());
         }
