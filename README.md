@@ -1,6 +1,8 @@
 # SekaiEngine
 Sekai Game engine - my 2D game engine built base on what I know about game development. This game engine can run on Windows, Linux and Web platform
 
+[Project is temporaty unmaintained]
+
 ## Library
 * raylib 4.0.0
 
