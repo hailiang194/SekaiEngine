@@ -56,6 +56,7 @@ void SekaiEngine::Core::Scence::render()
 {
     //render
     BeginDrawing();
+    ClearBackground(m_background.get());
     m_ctBack.render();
 
     BeginMode2D(m_camera);

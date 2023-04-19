@@ -5,6 +5,7 @@
 
 #include "raylib.h"
 #include "./Container.hpp"
+#include "api/Color.hpp"
 
 namespace SekaiEngine
 {
@@ -31,7 +32,7 @@ namespace SekaiEngine
 
             void addObject(GameObject* object, const SCENCE_LAYER& layer = SCENCE_LAYER::CAMERA);
         protected:
-            Color m_background;
+            API::Color m_background;
             Camera2D m_camera;
 
             Container m_ctBack;
