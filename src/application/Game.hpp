@@ -18,6 +18,7 @@ namespace SekaiEngine
             ~Game();
 
             static Game *g_instance;
+            
         };
     } // namespace Application
     

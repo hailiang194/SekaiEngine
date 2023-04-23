@@ -54,20 +54,18 @@ void SekaiEngine::Core::Scence::update()
 
 void SekaiEngine::Core::Scence::render()
 {
-    // preRender
-    m_ctBack.preRender();
-    m_ctCamera.preRender();
-    m_ctFront.preRender();
-
     // render
     BeginDrawing();
     ClearBackground(m_background.get());
+    m_ctBack.preRender();
     m_ctBack.render();
 
     BeginMode2D(m_camera);
+    m_ctCamera.preRender();
     m_ctCamera.render();
     EndMode2D();
-
+    
+    m_ctFront.preRender();
     m_ctFront.render();
     EndDrawing();
 }

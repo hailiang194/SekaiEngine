@@ -3,6 +3,8 @@
 
 #include "./Monitor.hpp"
 #include "api/Vector2D.hpp"
+#include <string>
+#include <cassert>
 
 #define STATE_FLAG_TYPE unsigned int
 
@@ -22,7 +24,7 @@ namespace SekaiEngine
         class Window
         {
         public:
-            Window(const int &width, const int &height, const int &title);
+            Window(const int &width, const int &height, const std::string &title);
             ~Window();
 
             const bool isReady();
@@ -37,6 +39,9 @@ namespace SekaiEngine
             const int getHeight();
             const API::Vector2D position();
             void* windowHandle();
+
+            const std::string& title() const;
+            const std::string& title();
 #ifdef PLATFORM_DESKTOP
             const bool isHidden();
             const bool isMaximized();
@@ -51,6 +56,8 @@ namespace SekaiEngine
             void setMinSize(const int& width, const int& height);
             void setOpacity(const float& opacity);
 #endif
+        private:
+            std::string m_title;
         };
 
         inline const bool Window::isReady()
@@ -105,8 +112,93 @@ namespace SekaiEngine
 
         inline const API::Vector2D Window::position()
         {
-            return (API::Vector2D)GetWindowPosition();
+            return static_cast<API::Vector2D>(GetWindowPosition());
         }
+
+        inline void* Window::windowHandle()
+        {
+            return GetWindowHandle();
+        }
+
+        inline const std::string& Window::title() const
+        {
+            return m_title;
+        }
+
+        inline const std::string& Window::title()
+        {
+            return static_cast<const Window&>(*this).title();
+        }
+
+#ifdef PLATFORM_DESKTOP
+        inline const bool Window::isHidden()
+        {
+            return IsWindowHidden();
+        }
+
+        inline const bool Window::isMaximized()
+        {
+            return IsWindowMaximized();
+        }
+
+        inline const bool Window::isMinimized()
+        {
+            return IsWindowMinimized();
+        }
+
+        inline const bool Window::isForcused()
+        {
+            return IsWindowFocused();
+        }
+
+        inline void Window::setState(const STATE_FLAG_TYPE& flag)
+        {
+            SetWindowState(flag);
+        }
+
+        inline void Window::toggleFullscreen()
+        {
+            return ToggleFullscreen();
+        }
+
+        inline void Window::setWindowState(const WindowState& state)
+        {
+            switch(state)
+            {
+                case WindowState::MAXIMIZE:
+                    MaximizeWindow();
+                    break;
+                case WindowState::MINIMIZE:
+                    MinimizeWindow();
+                    break;
+                case WindowState::RESTORE:
+                    RestoreWindow();
+                    break;
+            }
+        }
+
+        inline void Window::setTitle(const std::string& title)
+        {
+            m_title = title;
+            SetWindowTitle(m_title.c_str());
+        }
+
+        inline void Window::setPosition(const API::Vector2D& position)
+        {
+            SetWindowPosition(static_cast<int>(position.x()), static_cast<int>(position.y()));
+        }
+
+        inline void Window::setMinSize(const int& width, const int& height)
+        {
+            assert(isState(FLAG_WINDOW_RESIZABLE));
+            SetWindowMinSize(width, height);
+        }
+
+        inline void Window::setOpacity(const float& opacity)
+        {
+
+        }
+#endif
     } // namespace API
 
 } // namespace SekaiEngine

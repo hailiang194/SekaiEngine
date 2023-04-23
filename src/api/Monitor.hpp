@@ -2,7 +2,9 @@
 #define SEKAI_ENGINE_API_MONITOR_HPP
 
 #include <cstddef>
+#include <string>
 #include "raylib.h"
+#include "./Vector2D.hpp"
 
 #define MONITOR_CORE_TYPE int
 
@@ -23,6 +25,15 @@ namespace SekaiEngine
 
             const int height() const;
             const int height();
+
+            const API::Vector2D position() const;
+            const API::Vector2D position();
+
+            const int refreshRate() const;
+            const int refreshRate();
+
+            const std::string name() const;
+            const std::string name();
 
             const MONITOR_CORE_TYPE& get() const;
             const MONITOR_CORE_TYPE& get();
@@ -56,6 +67,37 @@ namespace SekaiEngine
         inline const MONITOR_CORE_TYPE& Monitor::get() const
         {
             return m_core;
+        }
+
+        inline const API::Vector2D Monitor::position() const
+        {
+            return (API::Vector2D)GetMonitorPosition(m_core);
+        }
+
+        inline const API::Vector2D Monitor::position()
+        {
+            return static_cast<const Monitor&>(*this).position();
+        }
+
+        inline const int Monitor::refreshRate() const
+        {
+            return GetMonitorRefreshRate(m_core);
+        }
+
+        inline const int Monitor::refreshRate()
+        {
+            return static_cast<const Monitor&>(*this).refreshRate();
+        }
+
+        inline const std::string Monitor::name() const
+        {
+            const char* name = GetMonitorName(m_core);
+            return std::string(name);
+        }
+
+        inline const std::string Monitor::name()
+        {
+            return static_cast<const Monitor&>(*this).name();
         }
 
         inline const MONITOR_CORE_TYPE& Monitor::get()

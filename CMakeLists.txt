@@ -12,9 +12,11 @@ add_subdirectory(vendors/raylib)
 set(engine_public_headers
     src/utility/math.hpp
     src/api/Color.hpp
+    src/api/Camera2D.hpp
     src/api/Monitor.hpp
     src/api/Window.hpp
     src/api/Vector2D.hpp
+    src/api/Ticker.hpp
     src/core/GameObject.hpp
     src/core/Container.hpp
     src/core/Scence.hpp
@@ -24,9 +26,11 @@ set(engine_public_headers
 set(engine_sources
     src/utility/math.cpp
     src/api/Color.cpp
+    src/api/Camera2D.cpp
     src/api/Monitor.cpp
     src/api/Window.cpp
     src/api/Vector2D.cpp
+    src/api/Ticker.cpp
     src/core/GameObject.cpp
     src/core/Container.cpp
     src/core/Scence.cpp
