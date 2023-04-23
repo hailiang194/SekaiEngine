@@ -58,12 +58,12 @@ void SekaiEngine::Core::Container::render()
     }
 }
 
-void SekaiEngine::Core::Container::postRender()
+void SekaiEngine::Core::Container::preRender()
 {
     for (auto iter = m_objects.begin(); iter != m_objects.end(); ++iter)
     {
         if ((*iter) != nullptr)
-            (*iter)->postRender();
+            (*iter)->preRender();
     }
 }
 
@@ -91,6 +91,7 @@ void SekaiEngine::Core::Container::removeObject(GameObject *child, const bool &i
     if(foundChildIter == m_objects.end())
         return;
 
+    (*foundChildIter)->observe(nullptr);
     m_objects.erase(foundChildIter);
     if(child != nullptr && isDeleted)
         delete child;

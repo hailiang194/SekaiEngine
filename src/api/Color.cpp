@@ -41,7 +41,7 @@ SekaiEngine::API::Color& SekaiEngine::API::Color::operator=(const uint32_t& colo
     return (*this);
 }
 
-bool SekaiEngine::API::Color::operator==(const SekaiEngine::API::Color& color)
+const bool SekaiEngine::API::Color::operator==(const SekaiEngine::API::Color& color)
 {
     return this->getCode() == color.getCode();
 }

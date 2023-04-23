@@ -32,7 +32,7 @@ namespace SekaiEngine
 
             ~Color();
 
-            bool operator==(const Color& color);
+            const bool operator==(const Color& color);
 
             uint32_t getCode() const;
             uint32_t getCode();

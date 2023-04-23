@@ -13,7 +13,7 @@ SekaiEngine::Core::Scence::Scence(const SekaiEngine::Core::Scence &scence)
 
 SekaiEngine::Core::Scence &SekaiEngine::Core::Scence::operator=(const SekaiEngine::Core::Scence &scence)
 {
-    m_background = scence.m_background; 
+    m_background = scence.m_background;
     m_camera = scence.m_camera;
     m_ctBack = scence.m_ctBack;
     m_ctCamera = scence.m_ctCamera;
@@ -38,15 +38,15 @@ void SekaiEngine::Core::Scence::setup()
 
 void SekaiEngine::Core::Scence::update()
 {
-    //interact
+    // interact
     m_ctBack.interact();
     m_ctCamera.interact();
     m_ctFront.interact();
-    //animate
+    // animate
     m_ctBack.animate();
     m_ctCamera.animate();
     m_ctFront.animate();
-    //event
+    // event
     m_ctBack.event();
     m_ctCamera.event();
     m_ctFront.event();
@@ -54,7 +54,12 @@ void SekaiEngine::Core::Scence::update()
 
 void SekaiEngine::Core::Scence::render()
 {
-    //render
+    // preRender
+    m_ctBack.preRender();
+    m_ctCamera.preRender();
+    m_ctFront.preRender();
+
+    // render
     BeginDrawing();
     ClearBackground(m_background.get());
     m_ctBack.render();
@@ -62,31 +67,26 @@ void SekaiEngine::Core::Scence::render()
     BeginMode2D(m_camera);
     m_ctCamera.render();
     EndMode2D();
-    
+
     m_ctFront.render();
     EndDrawing();
-
-    //postRender
-    m_ctBack.postRender();
-    m_ctCamera.postRender();
-    m_ctFront.postRender();
 }
 
 void SekaiEngine::Core::Scence::addObject(GameObject *object, const SCENCE_LAYER &layer)
 {
-    switch(layer)
+    switch (layer)
     {
-        case SekaiEngine::Core::SCENCE_LAYER::BACK_CAMERA:
-            m_ctBack.addObject(object);
-            break;
-        case SekaiEngine::Core::SCENCE_LAYER::CAMERA:
-            m_ctCamera.addObject(object);
-            break;
-        case SekaiEngine::Core::SCENCE_LAYER::FRONT_CAMERA:
-            m_ctFront.addObject(object);
-            break;
-        default:
-            assert(1 == 1);
-            break;
+    case SekaiEngine::Core::SCENCE_LAYER::BACK_CAMERA:
+        m_ctBack.addObject(object);
+        break;
+    case SekaiEngine::Core::SCENCE_LAYER::CAMERA:
+        m_ctCamera.addObject(object);
+        break;
+    case SekaiEngine::Core::SCENCE_LAYER::FRONT_CAMERA:
+        m_ctFront.addObject(object);
+        break;
+    default:
+        assert(1 == 1);
+        break;
     }
 }

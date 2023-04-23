@@ -36,7 +36,7 @@ namespace SekaiEngine
             virtual void animate() = 0;
             virtual void event() = 0;
             virtual void render() = 0;
-            virtual void postRender() = 0;
+            virtual void preRender() = 0;
 
         protected:
             // setup object when contructing

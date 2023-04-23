@@ -7,7 +7,7 @@ SekaiEngine::Core::GameObject::GameObject(const int& zIndex, const bool& isAlive
 }
 
 SekaiEngine::Core::GameObject::GameObject(const SekaiEngine::Core::GameObject& object)
-    :m_zIndex(object.m_zIndex), m_isAlive(object.m_isAlive), m_observer(object.m_observer)
+    :m_zIndex(object.m_zIndex), m_isAlive(object.m_isAlive), m_observer(nullptr)
 {
 
 }
@@ -16,7 +16,7 @@ SekaiEngine::Core::GameObject& SekaiEngine::Core::GameObject::operator=(const Se
 {
     m_zIndex = object.m_zIndex;
     m_isAlive = object.m_isAlive;
-    m_observer = object.m_observer;
+    m_observer = nullptr;
 
     return (*this);
 }

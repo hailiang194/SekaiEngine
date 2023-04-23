@@ -20,7 +20,7 @@ namespace SekaiEngine
             virtual void animate();
             virtual void event();
             virtual void render();
-            virtual void postRender();
+            virtual void preRender();
 
             void addObject(GameObject* child);
             void removeObject(GameObject* child, const bool& isDeleted = true);

@@ -10,17 +10,27 @@ add_subdirectory(vendors/raylib)
 
 
 set(engine_public_headers
+    src/utility/math.hpp
     src/api/Color.hpp
+    src/api/Monitor.hpp
+    src/api/Window.hpp
+    src/api/Vector2D.hpp
     src/core/GameObject.hpp
     src/core/Container.hpp
     src/core/Scence.hpp
+    src/application/Application.hpp
 )
 
 set(engine_sources
+    src/utility/math.cpp
     src/api/Color.cpp
+    src/api/Monitor.cpp
+    src/api/Window.cpp
+    src/api/Vector2D.cpp
     src/core/GameObject.cpp
     src/core/Container.cpp
     src/core/Scence.cpp
+    src/application/Application.cpp
 )
 
 add_library(${PROJECT_NAME} STATIC ${engine_sources} ${engine_public_headers})
