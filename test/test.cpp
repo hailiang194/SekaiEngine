@@ -131,6 +131,7 @@ TEST(EngineTest, TestPointAndLineCodirectionalButNotInterect)
 
 TEST(EngineTest, TestLineAndPointCodirectionalButNotInterect)
 {
+  
   SekaiEngine::API::Line l({1.0f, 1.0f}, {3.0f, 3.0f});
   SekaiEngine::API::Point p({0.0f, 0.0f});
   EXPECT_FALSE(l.intersect(p));
