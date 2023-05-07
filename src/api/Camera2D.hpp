@@ -38,6 +38,46 @@ namespace SekaiEngine
             float m_rotation;
             float m_zoom;
         };
+
+        inline const API::Vector2D& Camera2D::offset() const
+        {
+            return m_offset;
+        }
+
+        inline API::Vector2D& Camera2D::offset()
+        {
+            return const_cast<API::Vector2D&>(static_cast<const Camera2D&>(*this).offset());
+        }
+
+        inline const API::Vector2D& Camera2D::target() const
+        {
+            return m_target;
+        }
+
+        inline API::Vector2D& Camera2D::target()
+        {
+            return const_cast<API::Vector2D&>(static_cast<const Camera2D&>(*this).target());
+        }
+
+        inline const float& Camera2D::rotation() const
+        {
+            return m_rotation;
+        }
+
+        inline float& Camera2D::rotation()
+        {
+            return const_cast<float&>(static_cast<const Camera2D&>(*this).rotation());
+        }
+
+        inline const float& Camera2D::zoom() const
+        {
+            return m_zoom;
+        }
+
+        inline float& Camera2D::zoom()
+        {
+            return const_cast<float&>(static_cast<const Camera2D&>(*this).zoom());
+        }
     } // namespace API
     
 } // namespace SekaiEngine

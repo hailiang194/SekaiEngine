@@ -21,6 +21,7 @@ set(engine_public_headers
     src/core/Container.hpp
     src/core/Scence.hpp
     src/application/Application.hpp
+    src/renderable/Renderable.hpp
 )
 
 set(engine_sources
@@ -35,6 +36,7 @@ set(engine_sources
     src/core/Container.cpp
     src/core/Scence.cpp
     src/application/Application.cpp
+    src/renderable/Renderable.cpp
 )
 
 add_library(${PROJECT_NAME} STATIC ${engine_sources} ${engine_public_headers})

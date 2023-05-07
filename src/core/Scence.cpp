@@ -1,7 +1,7 @@
 #include <cassert>
 #include "./Scence.hpp"
 
-SekaiEngine::Core::Scence::Scence(const Color &color, const Camera2D &camera)
+SekaiEngine::Core::Scence::Scence(const Color &color, const API::Camera2D &camera)
     : m_background(color), m_camera(camera), m_ctBack(), m_ctCamera(), m_ctFront()
 {
 }
@@ -60,10 +60,10 @@ void SekaiEngine::Core::Scence::render()
     m_ctBack.preRender();
     m_ctBack.render();
 
-    BeginMode2D(m_camera);
+    m_camera.start();
     m_ctCamera.preRender();
     m_ctCamera.render();
-    EndMode2D();
+    m_camera.end();
     
     m_ctFront.preRender();
     m_ctFront.render();

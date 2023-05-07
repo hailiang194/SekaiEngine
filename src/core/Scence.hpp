@@ -1,11 +1,9 @@
 #ifndef SEKAI_ENGINE_CORE_SCENCE_HPP
 #define SEKAI_ENGINE_CORE_SCENCE_HPP
 
-#define DEFAULT_CAMERA {{ 0, 0 }, { 0, 0 }, 0.0f, 1.0f }
-
-#include "raylib.h"
 #include "./Container.hpp"
 #include "api/Color.hpp"
+#include "api/Camera2D.hpp"
 
 namespace SekaiEngine
 {
@@ -21,7 +19,7 @@ namespace SekaiEngine
         class Scence 
         {
         public:
-            Scence(const Color& color = BLACK, const Camera2D& camera = DEFAULT_CAMERA);
+            Scence(const Color& color = BLACK, const API::Camera2D& camera = API::Camera2D());
             Scence(const Scence& scence);
             Scence& operator=(const Scence& scence);
             virtual ~Scence();
@@ -33,7 +31,7 @@ namespace SekaiEngine
             void addObject(GameObject* object, const SCENCE_LAYER& layer = SCENCE_LAYER::CAMERA);
         protected:
             API::Color m_background;
-            Camera2D m_camera;
+            API::Camera2D m_camera;
 
             Container m_ctBack;
             Container m_ctCamera;
