@@ -17,9 +17,20 @@ namespace SekaiEngine
             Vector2D &operator=(const ::Vector2 &vector);
             ~Vector2D();
 
+            const Vector2D operator+(const Vector2D &vector) const;
             const Vector2D operator+(const Vector2D &vector);
+            const Vector2D operator*(const float &scale) const;
             const Vector2D operator*(const float &scale);
+            const Vector2D operator-(const Vector2D &vector) const;
+            const Vector2D operator-(const Vector2D &vector);
+            const bool operator==(const Vector2D& vector) const;
             const bool operator==(const Vector2D& vector);
+            //dot product
+            const float dot(const Vector2D& vector) const;
+            const float dot(const Vector2D& vector);
+
+            const float distance() const;
+            const float distance();
 
             const float &x() const;
             float &x();

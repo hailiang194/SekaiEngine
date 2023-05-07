@@ -17,6 +17,7 @@ set(engine_public_headers
     src/api/Window.hpp
     src/api/Vector2D.hpp
     src/api/Ticker.hpp
+    src/api/Shape.hpp
     src/core/GameObject.hpp
     src/core/Container.hpp
     src/core/Scence.hpp
@@ -32,6 +33,7 @@ set(engine_sources
     src/api/Window.cpp
     src/api/Vector2D.cpp
     src/api/Ticker.cpp
+    src/api/Shape.cpp
     src/core/GameObject.cpp
     src/core/Container.cpp
     src/core/Scence.cpp

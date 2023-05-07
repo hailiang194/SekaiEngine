@@ -1,6 +1,7 @@
 #ifndef SEKAI_ENGINE_RENDERABLE_RENDERABLE_H
 #define SEKAI_ENGINE_RENDERABLE_RENDERABLE_H
 
+#include <cassert>
 #include "api/Color.hpp"
 #include "api/Vector2D.hpp"
 
@@ -13,7 +14,7 @@ namespace SekaiEngine
         class RenderableProperties
         {
         public:
-            RenderableProperties();
+            RenderableProperties(API::Vector2D* offset = nullptr);
             RenderableProperties(const RenderableProperties& properties);
             RenderableProperties& operator=(const RenderableProperties& properties);
             ~RenderableProperties();
@@ -42,8 +43,10 @@ namespace SekaiEngine
             const float& rotation() const;
             float& rotation();
 
-            const API::Vector2D& offset() const;
-            API::Vector2D& offset();
+            const API::Vector2D* offset() const;
+            const API::Vector2D* offset();
+
+            void updateOffset(const API::Vector2D& offset);
         private:
             //basic draw
             API::Color m_color;
@@ -58,13 +61,14 @@ namespace SekaiEngine
             API::Vector2D m_origin;
             float m_rotation;
             //offset position
-            API::Vector2D m_offset;
+            API::Vector2D* m_offset;
+            bool m_standaloneOffset;
         };
 
         class Renderable
         {
         public:
-            Renderable(const RenderableProperties& relative = RenderableProperties(), RenderableProperties* parent = nullptr);
+            Renderable(const RenderableProperties& relative, RenderableProperties* parent = nullptr);
             Renderable(const Renderable& renderable);
             Renderable& operator=(const Renderable& renderable);
             virtual ~Renderable();
@@ -79,7 +83,8 @@ namespace SekaiEngine
             const RenderableProperties& absolute();
 
             virtual void update();
-            virtual void render() = 0;
+            virtual bool shouldRender() = 0;
+            virtual void render(const bool renderBounding = false) = 0;
         private:
             RenderableProperties m_relative;
             RenderableProperties m_absolute;
@@ -166,14 +171,20 @@ namespace SekaiEngine
             return const_cast<float&>(static_cast<const RenderableProperties&>(*this).rotation());
         }
 
-        inline const API::Vector2D& RenderableProperties::offset() const
+        inline const API::Vector2D* RenderableProperties::offset() const
         {
             return m_offset;
         }
 
-        inline API::Vector2D& RenderableProperties::offset()
+        inline const API::Vector2D* RenderableProperties::offset()
         {
-            return const_cast<API::Vector2D&>(static_cast<const RenderableProperties&>(*this).offset());
+            return static_cast<const RenderableProperties&>(*this).offset();
+        }
+
+        inline void RenderableProperties::updateOffset(const API::Vector2D& offset)
+        {
+            assert(!m_standaloneOffset);
+            *m_offset = offset;
         }
 
         inline const RenderableProperties& Renderable::relative() const

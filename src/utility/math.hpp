@@ -1,6 +1,8 @@
 #ifndef SEKAI_ENGINE_UTILITY_MATH_HPP
 #define SEKAI_ENGINE_UTILITY_MATH_HPP
 
+#include <cmath>
+
 #define DEFAULT_EPSILON 0.0001f
 
 namespace SekaiEngine
