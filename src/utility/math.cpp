@@ -1,18 +1,10 @@
-#include "math.h"
+#include <cmath>
+#include "./math.hpp"
 
-namespace SekaiEngine
+const int SekaiEngine::Utility::cmpFloat(const float &first, const float &second, const float &epsilon)
 {
-    namespace Math
-    {
-        int compareFloat(const float& first, const float& second, const float& epsilon)
-        {
-            if(std::fabs(first- second) < epsilon)
-                return 0;
+    if (std::fabs(first - second) < epsilon)
+        return 0;
 
-            return (first > second) ? 1: -1;
-        }        
-    } // namespace Math
-    
-} // namespace SekaiEngine
-
-
+    return (first > second) ? 1 : -1;
+}

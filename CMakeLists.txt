@@ -2,82 +2,67 @@ cmake_minimum_required(VERSION 3.1)
 project(SekaiEngine VERSION 0.0.1)
 set(CMAKE_CXX_STANDARD 11)
 
-set(engine_include_dir "${CMAKE_CURRENT_BINARY_DIR}/include" CACHE STRING "Sekai Engine include headers path")
+set(RUN_TEST OFF CACHE BOOL "Set on for run testing engine")
+message(STATUS "RUN_TEST=${RUN_TEST}")
+
 set(LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/libs)
 add_subdirectory(vendors/raylib)
 
 
 set(engine_public_headers
-    src/core/application.h
-    src/core/scence_manager.h
-    src/core/game.h
-    src/core/asset-manager.h
-    src/graphics/graphic.h
-    src/graphics/shape.h
-    src/graphics/transform2d.h
-    src/graphics/texture.h
-    src/input/keyboard.h
-    src/input/mouse.h
-    src/input/gamepad.h
-    src/input/touch.h
-    src/input/input-axis.h
-    src/input/input-manager.h
-    src/objects/game_object.h
-    src/objects/scence.h
-    src/objects/sprite.h
-    src/shapes/point.h
-    src/shapes/circle.h
-    src/shapes/line.h
-    src/shapes/rectangle.h
-    src/utility/vector2d.h
-    src/utility/math.h
+    src/utility/math.hpp
+    src/api/Color.hpp
+    src/api/Camera2D.hpp
+    src/api/Monitor.hpp
+    src/api/Window.hpp
+    src/api/Vector2D.hpp
+    src/api/Ticker.hpp
+    src/api/Shape.hpp
+    src/core/GameObject.hpp
+    src/core/Container.hpp
+    src/core/Scence.hpp
+    src/application/Application.hpp
+    src/renderable/Renderable.hpp
 )
 
 set(engine_sources
-    src/core/application.cpp
-    src/core/scence_manager.cpp
-    src/core/game.cpp
-    src/core/asset-manager.cpp
-    src/graphics/graphic.cpp
-    src/graphics/shape.cpp
-    src/graphics/transform2d.cpp
-    src/graphics/texture.cpp
-    src/input/keyboard.cpp
-    src/input/mouse.cpp
-    src/input/gamepad.cpp
-    src/input/touch.cpp
-    src/input/input-axis.cpp
-    src/input/input-manager.cpp
-    src/objects/game_object.cpp
-    src/objects/game_objects_container.cpp
-    src/objects/scence.cpp
-    src/objects/sprite.cpp
-    src/shapes/point.cpp
-    src/shapes/circle.cpp
-    src/shapes/line.h
-    src/shapes/rectangle.cpp
-    src/utility/vector2d.cpp
     src/utility/math.cpp
-
+    src/api/Color.cpp
+    src/api/Camera2D.cpp
+    src/api/Monitor.cpp
+    src/api/Window.cpp
+    src/api/Vector2D.cpp
+    src/api/Ticker.cpp
+    src/api/Shape.cpp
+    src/core/GameObject.cpp
+    src/core/Container.cpp
+    src/core/Scence.cpp
+    src/application/Application.cpp
+    src/renderable/Renderable.cpp
 )
 
-# add_subdirectory(src/src/core)
-# add_subdirectory(src/utility)
-# add_subdirectory(src/objects)
-# add_subdirectory(src/src/graphics)
-# add_subdirectory(src/shapes)
-# add_subdirectory(src/input)
-
-# add_library(${PROJECT_NAME} INTERFACE)
-# target_link_libraries
-# add_library(${PROJECT_NAME} STATIC 
-# $<TARGET_OBJECTS:engine_src/core> 
-# $<TARGET_OBJECTS:engine_object>  
-# $<TARGET_OBJECTS:engine_utility>  
-# $<TARGET_OBJECTS:engine_graphic>  
-# $<TARGET_OBJECTS:engine_shape>
-# $<TARGET_OBJECTS:engine_input> 
-# )
-
 add_library(${PROJECT_NAME} STATIC ${engine_sources} ${engine_public_headers})
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_link_libraries(${PROJECT_NAME} raylib)
+
+if(RUN_TEST)
+    include(FetchContent)
+    FetchContent_Declare(
+    googletest
+    URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+    )
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    FetchContent_MakeAvailable(googletest)
+
+    enable_testing()
+    add_executable(engine_test
+        test/test.cpp
+    )
+
+
+    target_link_libraries(engine_test GTest::gtest_main ${PROJECT_NAME})
+    target_include_directories(engine_test PUBLIC src/)
+
+    include(GoogleTest)
+    gtest_discover_tests(engine_test)
+endif()
