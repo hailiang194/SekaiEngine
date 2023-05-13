@@ -131,8 +131,35 @@ TEST(EngineTest, TestPointAndLineCodirectionalButNotInterect)
 
 TEST(EngineTest, TestLineAndPointCodirectionalButNotInterect)
 {
-  
   SekaiEngine::API::Line l({1.0f, 1.0f}, {3.0f, 3.0f});
   SekaiEngine::API::Point p({0.0f, 0.0f});
   EXPECT_FALSE(l.intersect(p));
+}
+
+TEST(EngineTest, TestCircleBorderAndPointInterect)
+{
+  SekaiEngine::API::Circle c({2.0f, -1.0f}, 3.0f);
+  SekaiEngine::API::Point p({2.0f, 1.0f});
+  EXPECT_TRUE(c.intersect(p));
+}
+
+TEST(EngineTest, TestPointAndCircleBorderInterect)
+{
+  SekaiEngine::API::Circle c({2.0f, -1.0f}, 3.0f);
+  SekaiEngine::API::Point p({2.0f, 1.0f});
+  EXPECT_TRUE(p.intersect(c));
+}
+
+TEST(EngineTest, TestPointAndCircleInsideInterect)
+{
+  SekaiEngine::API::Circle c({2.0f, -1.0f}, 3.0f);
+  SekaiEngine::API::Point p({1.5f, 0.5f});
+  EXPECT_TRUE(p.intersect(c));
+}
+
+TEST(EngineTest, TestPointAndCircleNotInterect)
+{
+  SekaiEngine::API::Circle c({2.0f, -1.0f}, 3.0f);
+  SekaiEngine::API::Point p({5.0f, 3.0f});
+  EXPECT_FALSE(p.intersect(c));
 }

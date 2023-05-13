@@ -54,6 +54,27 @@ namespace SekaiEngine
             API::Vector2D m_first;
             API::Vector2D m_second;
         };
+
+        class Circle: public Shape
+        {
+        public:
+            Circle(const API::Vector2D& origin, const float& radius);
+            Circle(const Circle& circle);
+            Circle& operator=(const Circle& circle);
+            ~Circle();
+
+            bool intersect(const Shape& shape) override;
+
+            const API::Vector2D& origin() const;
+            API::Vector2D& origin();
+
+            const float& radius() const;
+            float& radius();
+
+        private:
+            API::Vector2D m_origin;
+            float m_radius;
+        };
         
         inline const API::Vector2D& Point::point() const
         {
@@ -83,6 +104,26 @@ namespace SekaiEngine
         inline API::Vector2D& Line::second()
         {
             return const_cast<API::Vector2D&>(static_cast<const Line&>(*this).second());
+        }
+
+        inline const API::Vector2D& Circle::origin() const
+        {
+            return m_origin;
+        }
+
+        inline API::Vector2D& Circle::origin()
+        {
+            return const_cast<API::Vector2D&>(static_cast<const Circle&>(*this).origin());
+        }
+
+        inline const float& Circle::radius() const
+        {
+            return m_radius;
+        }
+
+        inline float& Circle::radius()
+        {
+            return const_cast<float&>(static_cast<const Circle&>(*this).radius());
         }
     } // namespace API
     
