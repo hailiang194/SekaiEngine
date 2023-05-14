@@ -42,6 +42,48 @@ const bool isIntersectCircleWithCircle(const SekaiEngine::API::Circle& c1, const
     return SekaiEngine::Utility::cmpFloat(disVector.distance(), c1.radius() + c2.radius()) <= 0;
 }
 
+const bool isIntersectRectWithPoint(const SekaiEngine::API::Rectangle& r, const SekaiEngine::API::Point& p)
+{
+    if(r.position() == p.point())
+    {
+        return true;
+    }
+
+    auto disVector = p.point() - r.position();
+    return 
+    (
+        SekaiEngine::Utility::cmpFloat(disVector.x(), 0.0f) >= 0 &&
+        SekaiEngine::Utility::cmpFloat(disVector.x(), r.width()) <= 0 &&
+        SekaiEngine::Utility::cmpFloat(disVector.y(), 0.0f) >= 0 &&
+        SekaiEngine::Utility::cmpFloat(disVector.y(), r.height()) <= 0
+    );
+}
+
+const bool isIntersectRectWithLine(const SekaiEngine::API::Rectangle& r, const SekaiEngine::API::Line& l)
+{
+    assert(true && "Not support yet");
+    return false;
+}
+
+const bool isIntersectRectWithCircle(const SekaiEngine::API::Rectangle& r, const SekaiEngine::API::Circle& c)
+{
+    assert(true && "Not support yet");
+    return false;
+}
+
+const bool isIntersectRectWithRect(const SekaiEngine::API::Rectangle& r1, const SekaiEngine::API::Rectangle& r2)
+{
+    //ref: http://jeffreythompson.org/collision-detection/rect-rect.php
+    return 
+    (
+        SekaiEngine::Utility::cmpFloat(r1.position().x() + r1.width(), r2.position().x()) >= 0 &&
+        SekaiEngine::Utility::cmpFloat(r1.position().x(), r2.width() + r2.position().x()) <= 0 &&
+        SekaiEngine::Utility::cmpFloat(r1.position().y() + r1.height(), r2.position().y()) >= 0 &&
+        SekaiEngine::Utility::cmpFloat(r1.position().y(), r2.width() + r2.position().y()) >= 0
+    );
+}
+
+
 SekaiEngine::API::Shape::Shape()
 {
 
@@ -91,7 +133,7 @@ SekaiEngine::API::Point::~Point()
 
 }
 
-bool SekaiEngine::API::Point::intersect(const Shape& shape)
+const bool SekaiEngine::API::Point::intersect(const Shape& shape) const
 {
     const Point* p = dynamic_cast<const Point*>(&shape); 
     if(p != nullptr)
@@ -111,6 +153,11 @@ bool SekaiEngine::API::Point::intersect(const Shape& shape)
         return isIntersectCircleWithPoint(*c, *this);
     }
 
+    const Rectangle* r = dynamic_cast<const Rectangle*>(&shape);
+    if(r != nullptr)
+    {
+        return isIntersectRectWithPoint(*r, *this);
+    }
     return false;
 }
 
@@ -140,7 +187,7 @@ SekaiEngine::API::Line::~Line()
 
 }
 
-bool SekaiEngine::API::Line::intersect(const Shape& shape)
+const bool SekaiEngine::API::Line::intersect(const Shape& shape) const
 {
     const Point* p = dynamic_cast<const Point*>(&shape); 
     if(p != nullptr)
@@ -158,6 +205,12 @@ bool SekaiEngine::API::Line::intersect(const Shape& shape)
     if(c != nullptr)
     {
         return isIntersectCircleWithLine(*c, *this);
+    }
+
+    const Rectangle* r = dynamic_cast<const Rectangle*>(&shape);
+    if(r != nullptr)
+    {
+        return isIntersectRectWithLine(*r, *this);
     }
     return false;
 }
@@ -188,7 +241,7 @@ SekaiEngine::API::Circle::~Circle()
 
 }
 
-bool SekaiEngine::API::Circle::intersect(const Shape& shape)
+const bool SekaiEngine::API::Circle::intersect(const Shape& shape) const
 {
     const Point* p = dynamic_cast<const Point*>(&shape);
     if(p != nullptr)
@@ -206,6 +259,68 @@ bool SekaiEngine::API::Circle::intersect(const Shape& shape)
     if(c != nullptr)
     {
         return isIntersectCircleWithCircle(*this, *c);
+    }
+
+    const Rectangle* r = dynamic_cast<const Rectangle*>(&shape);
+    if(r != nullptr)
+    {
+        return isIntersectRectWithCircle(*r, *this);
+    }
+    return false;
+}
+
+
+SekaiEngine::API::Rectangle::Rectangle(const API::Vector2D& position, const float& width, const float& height)
+    :Shape(), m_position(position), m_width(width), m_height(height)
+{
+
+}
+
+SekaiEngine::API::Rectangle::Rectangle(const Rectangle& rect)
+    :Shape(), m_position(rect.m_position), m_width(rect.m_width), m_height(rect.m_height)
+{
+
+}
+
+SekaiEngine::API::Rectangle& SekaiEngine::API::Rectangle::operator=(const Rectangle& rect)
+{
+    Shape::operator=(rect);
+    m_position = rect.m_position;
+    m_width = rect.m_width;
+    m_height = rect.m_height;
+
+    return (*this);
+}
+
+SekaiEngine::API::Rectangle::~Rectangle()
+{
+
+}
+
+const bool SekaiEngine::API::Rectangle::intersect(const Shape& shape) const
+{
+    const Point* p = dynamic_cast<const Point*>(&shape);
+    if(p != nullptr)
+    {
+        return isIntersectRectWithPoint(*this, *p);
+    }
+
+    const Line* l = dynamic_cast<const Line*>(&shape);
+    if(l != nullptr)
+    {
+        return isIntersectRectWithLine(*this, *l);
+    }
+
+    const Circle* c = dynamic_cast<const Circle*>(&shape);
+    if(c != nullptr)
+    {
+        return isIntersectRectWithCircle(*this, *c);
+    }
+
+    const Rectangle* r = dynamic_cast<const Rectangle*>(&shape);
+    if(r != nullptr)
+    {
+        return isIntersectRectWithRect(*this, *r);
     }
     return false;
 }

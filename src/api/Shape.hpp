@@ -1,7 +1,7 @@
 #ifndef SEKAI_ENGINE_API_SHAPE_HPP
 #define SEKAI_ENGINE_API_SHAPE_HPP
 
-#include "./Vector2D.hpp"
+#include "./Vector.hpp"
 
 namespace SekaiEngine
 {
@@ -15,7 +15,8 @@ namespace SekaiEngine
             Shape& operator=(const Shape& shape);
             virtual ~Shape();
 
-            virtual bool intersect(const Shape& shape) = 0;
+            virtual const bool intersect(const Shape& shape) const = 0;
+            const bool intersect(const Shape& shape);
         };
 
         class Point: public Shape
@@ -27,7 +28,7 @@ namespace SekaiEngine
             Point& operator=(const API::Vector2D& point);
             ~Point();
 
-            bool intersect(const Shape& shape) override;
+            const bool intersect(const Shape& shape) const override;
 
             const API::Vector2D& point() const;
             API::Vector2D& point();
@@ -43,7 +44,7 @@ namespace SekaiEngine
             Line& operator=(const Line& line);
             ~Line();
 
-            bool intersect(const Shape& shape) override;
+            const bool intersect(const Shape& shape) const override;
 
             const API::Vector2D& first() const;
             API::Vector2D& first();
@@ -63,7 +64,7 @@ namespace SekaiEngine
             Circle& operator=(const Circle& circle);
             ~Circle();
 
-            bool intersect(const Shape& shape) override;
+            const bool intersect(const Shape& shape) const override;
 
             const API::Vector2D& origin() const;
             API::Vector2D& origin();
@@ -75,6 +76,36 @@ namespace SekaiEngine
             API::Vector2D m_origin;
             float m_radius;
         };
+
+        class Rectangle: public Shape
+        {
+        public:
+            Rectangle(const API::Vector2D& position, const float& width, const float& height);
+            Rectangle(const Rectangle& rect);
+            Rectangle& operator=(const Rectangle& rect);
+            ~Rectangle();
+
+            const bool intersect(const Shape& shape) const override;
+
+            const API::Vector2D& position() const;
+            API::Vector2D& position();
+
+            const float& width() const;
+            float& width();
+
+            const float& height() const;
+            float& height();
+
+        private:
+            API::Vector2D m_position;
+            float m_width;
+            float m_height;
+        };
+
+        inline const bool Shape::intersect(const Shape& shape)
+        {
+            return static_cast<const Shape&>(*this).intersect(shape);
+        }
         
         inline const API::Vector2D& Point::point() const
         {
@@ -124,6 +155,36 @@ namespace SekaiEngine
         inline float& Circle::radius()
         {
             return const_cast<float&>(static_cast<const Circle&>(*this).radius());
+        }
+
+        inline const API::Vector2D& Rectangle::position() const
+        {
+            return m_position;
+        }
+
+        inline API::Vector2D& Rectangle::position()
+        {
+            return const_cast<API::Vector2D&>(static_cast<const Rectangle&>(*this).position());
+        }
+
+        inline const float& Rectangle::width() const
+        {
+            return m_width;
+        }
+
+        inline float& Rectangle::width()
+        {
+            return const_cast<float&>(static_cast<const Rectangle&>(*this).width());
+        }
+
+        inline const float& Rectangle::height() const
+        {
+            return m_height;
+        }
+
+        inline float& Rectangle::height()
+        {
+            return const_cast<float&>(static_cast<const Rectangle&>(*this).height());
         }
     } // namespace API
     

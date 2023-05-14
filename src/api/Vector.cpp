@@ -1,5 +1,5 @@
 #include "utility/math.hpp"
-#include "./Vector2D.hpp"
+#include "./Vector.hpp"
 
 SekaiEngine::API::Vector2D::Vector2D(const float &x, const float &y)
     :m_vector({x, y})

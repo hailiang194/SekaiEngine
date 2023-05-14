@@ -2,7 +2,7 @@
 #define SEKAI_ENGINE_API_WINDOW_HPP
 
 #include "./Monitor.hpp"
-#include "api/Vector2D.hpp"
+#include "api/Vector.hpp"
 #include <string>
 #include <cassert>
 

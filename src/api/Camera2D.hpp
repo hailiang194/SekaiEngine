@@ -2,7 +2,7 @@
 #define SEKAI_ENGINE_API_CAMERA_HPP
 
 #include "raylib.h"
-#include "./Vector2D.hpp"
+#include "./Vector.hpp"
 
 namespace SekaiEngine
 {

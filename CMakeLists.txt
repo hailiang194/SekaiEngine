@@ -15,7 +15,7 @@ set(engine_public_headers
     src/api/Camera2D.hpp
     src/api/Monitor.hpp
     src/api/Window.hpp
-    src/api/Vector2D.hpp
+    src/api/Vector.hpp
     src/api/Ticker.hpp
     src/api/Shape.hpp
     src/core/GameObject.hpp
@@ -23,6 +23,7 @@ set(engine_public_headers
     src/core/Scence.hpp
     src/application/Application.hpp
     src/renderable/Renderable.hpp
+    src/renderable/RenderableProperties.hpp
 )
 
 set(engine_sources
@@ -31,7 +32,7 @@ set(engine_sources
     src/api/Camera2D.cpp
     src/api/Monitor.cpp
     src/api/Window.cpp
-    src/api/Vector2D.cpp
+    src/api/Vector.cpp
     src/api/Ticker.cpp
     src/api/Shape.cpp
     src/core/GameObject.cpp
@@ -39,6 +40,7 @@ set(engine_sources
     src/core/Scence.cpp
     src/application/Application.cpp
     src/renderable/Renderable.cpp
+    src/renderable/RenderableProperties.cpp
 )
 
 add_library(${PROJECT_NAME} STATIC ${engine_sources} ${engine_public_headers})

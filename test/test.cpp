@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <api/Color.hpp>
-#include <api/Vector2D.hpp>
+#include <api/Vector.hpp>
 #include <api/Shape.hpp>
 
 // COLOR API
@@ -139,14 +139,14 @@ TEST(EngineTest, TestLineAndPointCodirectionalButNotInterect)
 TEST(EngineTest, TestCircleBorderAndPointInterect)
 {
   SekaiEngine::API::Circle c({2.0f, -1.0f}, 3.0f);
-  SekaiEngine::API::Point p({2.0f, 1.0f});
+  SekaiEngine::API::Point p({2.0f, 2.0f});
   EXPECT_TRUE(c.intersect(p));
 }
 
 TEST(EngineTest, TestPointAndCircleBorderInterect)
 {
   SekaiEngine::API::Circle c({2.0f, -1.0f}, 3.0f);
-  SekaiEngine::API::Point p({2.0f, 1.0f});
+  SekaiEngine::API::Point p({2.0f, 2.0f});
   EXPECT_TRUE(p.intersect(c));
 }
 
