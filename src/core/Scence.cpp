@@ -1,4 +1,3 @@
-#include <cassert>
 #include "./Scence.hpp"
 
 SekaiEngine::Core::Scence::Scence(const Color &color, const API::Camera2D &camera)
@@ -55,8 +54,7 @@ void SekaiEngine::Core::Scence::update()
 void SekaiEngine::Core::Scence::render()
 {
     // render
-    BeginDrawing();
-    ClearBackground(m_background.get());
+    _beginRender();
     m_ctBack.preRender();
     m_ctBack.render();
 
@@ -67,7 +65,7 @@ void SekaiEngine::Core::Scence::render()
     
     m_ctFront.preRender();
     m_ctFront.render();
-    EndDrawing();
+    _endRender();
 }
 
 void SekaiEngine::Core::Scence::addObject(GameObject *object, const SCENCE_LAYER &layer)
@@ -87,4 +85,21 @@ void SekaiEngine::Core::Scence::addObject(GameObject *object, const SCENCE_LAYER
         assert(1 == 1 && "Invalid layer");
         break;
     }
+}
+
+void SekaiEngine::Core::Scence::_beginRender()
+{
+#ifdef RAYLIB_API
+    BeginDrawing();
+    ClearBackground(m_background.get());
+#else
+#endif
+}
+
+void SekaiEngine::Core::Scence::_endRender()
+{
+#ifdef RAYLIB_API
+    EndDrawing();
+#else
+#endif
 }

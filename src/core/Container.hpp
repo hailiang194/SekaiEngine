@@ -24,6 +24,11 @@ namespace SekaiEngine
 
             void addObject(GameObject* child);
             void removeObject(GameObject* child, const bool& isDeleted = true);
+
+#ifdef TEST_RUN
+            const std::list<GameObject*> objects() const;
+            const std::list<GameObject*> objects();
+#endif
         protected:
             // setup object when contructing
             void setup();
@@ -35,6 +40,18 @@ namespace SekaiEngine
 
             std::list<GameObject*> m_objects;
         };
+
+#ifdef TEST_RUN
+        inline const std::list<GameObject*> Container::objects() const
+        {
+            return m_objects;
+        }
+
+        inline const std::list<GameObject*> Container::objects()
+        {
+            return static_cast<const Container&>(*this).objects();
+        }
+#endif
     } // namespace Core
     
 } // namespace SekaiEngine

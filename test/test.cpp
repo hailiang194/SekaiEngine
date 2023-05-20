@@ -1,7 +1,19 @@
 #include <gtest/gtest.h>
+#include <core/Container.hpp>
+#include <core/Scence.hpp>
 #include <api/Color.hpp>
 #include <api/Vector.hpp>
 #include <api/Shape.hpp>
+
+//Scence
+
+TEST(EngineTest, TestInsertToFrontScence)
+{
+  SekaiEngine::Core::Scence scence;
+  SekaiEngine::Core::Container container;
+  scence.addObject(&container, SekaiEngine::Core::SCENCE_LAYER::FRONT_CAMERA);
+  EXPECT_TRUE(scence.getLayer(SekaiEngine::Core::SCENCE_LAYER::FRONT_CAMERA).objects().size() == 1);
+}
 
 // COLOR API
 TEST(EngineTest, TestRaylibColorEqualToCode)

@@ -38,16 +38,17 @@ namespace SekaiEngine
             const float &y() const;
             float &y();
 
-            const VECTOR2_API& get() const;
-            const VECTOR2_API& get();
+            const VECTOR2_API get() const;
+            const VECTOR2_API get();
 
         private:
-            VECTOR2_API m_vector;
+            float m_x;
+            float m_y;
         };
 
         inline const float &Vector2D::x() const
         {
-            return m_vector.x;
+            return m_x;
         }
 
         inline float &Vector2D::x()
@@ -57,7 +58,7 @@ namespace SekaiEngine
 
         inline const float &Vector2D::y() const
         {
-            return m_vector.y;
+            return m_y;
         }
 
         inline float &Vector2D::y()
@@ -65,12 +66,15 @@ namespace SekaiEngine
             return const_cast<float&>(static_cast<const Vector2D&>(*this).y());
         }
 
-        inline const VECTOR2_API& Vector2D::get() const
+        inline const VECTOR2_API Vector2D::get() const
         {
-            return m_vector;
+#ifdef RAYLIB_API
+            return VECTOR2_API{m_x, m_y};
+#else
+#endif
         }
 
-        inline const VECTOR2_API& Vector2D::get()
+        inline const VECTOR2_API Vector2D::get()
         {
             return static_cast<const Vector2D&>(*this).get();
         }

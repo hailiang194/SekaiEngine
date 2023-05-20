@@ -37,8 +37,8 @@ namespace SekaiEngine
             uint32_t getCode() const;
             uint32_t getCode();
 
-            const COLOR_API& get() const;
-            const COLOR_API& get();
+            const COLOR_API get() const;
+            const COLOR_API get();
 
             const unsigned char& r() const;
             unsigned char& r();
@@ -52,12 +52,16 @@ namespace SekaiEngine
             const unsigned char& a() const;
             unsigned char& a();
         private:
-            COLOR_API m_color;
+            //COLOR_API m_color;
+            unsigned char m_r;
+            unsigned char m_g;
+            unsigned char m_b;
+            unsigned char m_a;
         };
 
         inline uint32_t Color::getCode() const
         {
-            return (m_color.a << 24) | (m_color.g << 16) | (m_color.b << 8) | m_color.a;
+            return (m_r << 24) | (m_g << 16) | (m_b << 8) | m_a;
         }
 
         inline uint32_t Color::getCode()
@@ -65,19 +69,22 @@ namespace SekaiEngine
             return static_cast<const Color&>(*this).getCode();
         }
 
-        inline const COLOR_API& Color::get() const
+        inline const COLOR_API Color::get() const
         {
-            return m_color;
+#ifdef RAYLIB_API
+            return COLOR_API{m_r, m_g, m_b, m_a};
+#else
+#endif
         }
 
-        inline const COLOR_API& Color::get()
+        inline const COLOR_API Color::get()
         {
             return static_cast<const Color&>(*this).get();
         }
 
         inline const unsigned char& Color::r() const
         {
-            return m_color.r;
+            return m_r;
         }
 
         inline unsigned char& Color::r()
@@ -87,7 +94,7 @@ namespace SekaiEngine
 
         inline const unsigned char& Color::g() const
         {
-            return m_color.g;
+            return m_g;
         }
 
         inline unsigned char& Color::g()
@@ -97,7 +104,7 @@ namespace SekaiEngine
 
         inline const unsigned char& Color::b() const
         {
-            return m_color.b;
+            return m_b;
         }
 
         inline unsigned char& Color::b()
@@ -107,7 +114,7 @@ namespace SekaiEngine
 
         inline const unsigned char& Color::a() const
         {
-            return m_color.a;
+            return m_a;
         }
 
         inline unsigned char& Color::a()

@@ -63,7 +63,7 @@ if(RUN_TEST)
         test/test.cpp
     )
 
-
+    target_compile_definitions(${PROJECT_NAME} PUBLIC TEST_RUN)
     target_link_libraries(engine_test GTest::gtest_main ${PROJECT_NAME})
     target_include_directories(engine_test PUBLIC src/)
 

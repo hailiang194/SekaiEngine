@@ -7,7 +7,10 @@ SekaiEngine::API::Camera2D::Camera2D(const API::Vector2D& offset, const API::Vec
 }
 
 SekaiEngine::API::Camera2D::Camera2D(const CAMERA_API& camera)
+#ifdef RAYLIB_API
     :m_offset(camera.offset), m_target(camera.target), m_rotation(camera.rotation), m_zoom(camera.zoom)
+#else
+#endif
 {
 
 }
@@ -30,10 +33,13 @@ SekaiEngine::API::Camera2D& SekaiEngine::API::Camera2D::operator=(const Camera2D
 
 SekaiEngine::API::Camera2D& SekaiEngine::API::Camera2D::operator=(const CAMERA_API& camera)
 {
+#ifdef RAYLIB_API
     m_offset = camera.offset; 
     m_target = camera.target;
     m_rotation = camera.rotation;
     m_zoom = camera.zoom;
+#else
+#endif
 
     return (*this);
 }
