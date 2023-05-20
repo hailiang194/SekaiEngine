@@ -1,7 +1,7 @@
 #ifndef SEKAI_ENGINE_API_TICKER_HPP
 #define SEKAI_ENGINE_API_TICKER_HPP
 
-#include "raylib.h"
+#include "./APIConfig.hpp"
 
 namespace SekaiEngine
 {
@@ -31,7 +31,10 @@ namespace SekaiEngine
 
         inline const float Ticker::frameTime() const
         {
+#ifdef RAYLIB_API
             return GetFrameTime();
+#else
+#endif
         }
 
         inline const float Ticker::frameTime()
@@ -41,7 +44,10 @@ namespace SekaiEngine
 
         inline const double Ticker::elapsedTime() const
         {
+#ifdef RAYLIB_API
             return GetTime();
+#else
+#endif
         }
 
         inline const double Ticker::elapsedTime()

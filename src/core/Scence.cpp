@@ -84,7 +84,7 @@ void SekaiEngine::Core::Scence::addObject(GameObject *object, const SCENCE_LAYER
         m_ctFront.addObject(object);
         break;
     default:
-        assert(1 == 1);
+        assert(1 == 1 && "Invalid layer");
         break;
     }
 }

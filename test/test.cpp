@@ -31,28 +31,28 @@ TEST(EngineTest, TestCodeEqualToRaylibColor)
 TEST(EngineTest, TestCodeWithRed)
 {
   SekaiEngine::API::Color a(0x00e430ff);
-  ::Color b = GREEN;
+  COLOR_API b = GREEN;
   EXPECT_TRUE(a.r() == b.r);
 }
 
 TEST(EngineTest, TestCodeWithGreen)
 {
   SekaiEngine::API::Color a(0x00e430ff);
-  ::Color b = GREEN;
+  COLOR_API b = GREEN;
   EXPECT_TRUE(a.g() == b.g);
 }
 
 TEST(EngineTest, TestCodeWithBlue)
 {
   SekaiEngine::API::Color a(0x00e430ff);
-  ::Color b = GREEN;
+  COLOR_API b = GREEN;
   EXPECT_TRUE(a.b() == b.b);
 }
 
 TEST(EngineTest, TestCodeWithAlpha)
 {
   SekaiEngine::API::Color a(0x00e430ff);
-  ::Color b = GREEN;
+  COLOR_API b = GREEN;
   EXPECT_TRUE(a.a() == b.a);
 }
 
@@ -61,7 +61,7 @@ TEST(EngineTest, TestCodeWithAlpha)
 TEST(EngineTest, TestVectorAndRaylibVector)
 {
   SekaiEngine::API::Vector2D vector(0.3f, 0.7f);
-  ::Vector2 raylibVector = {0.3f, 0.7f};
+  VECTOR2_API raylibVector = {0.3f, 0.7f};
   EXPECT_TRUE(vector == (SekaiEngine::API::Vector2D)raylibVector);
 }
 
@@ -70,7 +70,7 @@ TEST(EngineTest, TestVectorAddAndRaylibVector)
   SekaiEngine::API::Vector2D vector(0.1f, 0.3f);
   SekaiEngine::API::Vector2D vector2(0.2f, 0.4f);
   SekaiEngine::API::Vector2D sumVector = vector + vector2;
-  ::Vector2 raylibVector = {0.3f, 0.7f};
+  VECTOR2_API raylibVector = {0.3f, 0.7f};
   EXPECT_TRUE(sumVector == (SekaiEngine::API::Vector2D)raylibVector);
 }
 
@@ -79,7 +79,7 @@ TEST(EngineTest, TestVectorMinusAndRaylibVector)
   SekaiEngine::API::Vector2D vector(0.1f, 0.3f);
   SekaiEngine::API::Vector2D vector2(0.2f, 0.4f);
   SekaiEngine::API::Vector2D sumVector = vector2 - vector;
-  ::Vector2 raylibVector = {0.1f, 0.1f};
+  VECTOR2_API raylibVector = {0.1f, 0.1f};
   EXPECT_TRUE(sumVector == (SekaiEngine::API::Vector2D)raylibVector);
 }
 
@@ -87,7 +87,7 @@ TEST(EngineTest, TestVectorProductAndRaylibVector)
 {
   SekaiEngine::API::Vector2D vector(0.1f, 0.3f);
   SekaiEngine::API::Vector2D sumVector = vector * 3;
-  ::Vector2 raylibVector = {0.3f, 0.9f};
+  VECTOR2_API raylibVector = {0.3f, 0.9f};
   EXPECT_TRUE(sumVector == (SekaiEngine::API::Vector2D)raylibVector);
 }
 

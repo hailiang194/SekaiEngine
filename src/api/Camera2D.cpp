@@ -6,7 +6,7 @@ SekaiEngine::API::Camera2D::Camera2D(const API::Vector2D& offset, const API::Vec
 
 }
 
-SekaiEngine::API::Camera2D::Camera2D(const ::Camera2D& camera)
+SekaiEngine::API::Camera2D::Camera2D(const CAMERA_API& camera)
     :m_offset(camera.offset), m_target(camera.target), m_rotation(camera.rotation), m_zoom(camera.zoom)
 {
 
@@ -28,7 +28,7 @@ SekaiEngine::API::Camera2D& SekaiEngine::API::Camera2D::operator=(const Camera2D
     return (*this);
 }
 
-SekaiEngine::API::Camera2D& SekaiEngine::API::Camera2D::operator=(const ::Camera2D& camera)
+SekaiEngine::API::Camera2D& SekaiEngine::API::Camera2D::operator=(const CAMERA_API& camera)
 {
     m_offset = camera.offset; 
     m_target = camera.target;
@@ -45,6 +45,7 @@ SekaiEngine::API::Camera2D::~Camera2D()
 
 void SekaiEngine::API::Camera2D::start()
 {
+#ifdef RAYLIB_API
     BeginMode2D(
     {
         m_offset.get(),
@@ -52,9 +53,14 @@ void SekaiEngine::API::Camera2D::start()
         m_rotation,
         m_zoom
     });
+#else
+#endif
 }
 
 void SekaiEngine::API::Camera2D::end()
 {
+#ifdef RAYLIB_API
     EndMode2D();
+#else
+#endif
 }

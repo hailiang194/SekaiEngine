@@ -11,6 +11,7 @@ add_subdirectory(vendors/raylib)
 
 set(engine_public_headers
     src/utility/math.hpp
+    src/api/APIConfig.hpp
     src/api/Color.hpp
     src/api/Camera2D.hpp
     src/api/Monitor.hpp
@@ -45,6 +46,7 @@ set(engine_sources
 
 add_library(${PROJECT_NAME} STATIC ${engine_sources} ${engine_public_headers})
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_compile_definitions(${PROJECT_NAME} PUBLIC RAYLIB_API)
 target_link_libraries(${PROJECT_NAME} raylib)
 
 if(RUN_TEST)

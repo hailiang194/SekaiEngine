@@ -1,6 +1,6 @@
 #include "./Color.hpp"
 
-SekaiEngine::API::Color::Color(const ::Color& color)
+SekaiEngine::API::Color::Color(const COLOR_API& color)
     :m_color(color)
 {
 
@@ -26,7 +26,7 @@ SekaiEngine::API::Color& SekaiEngine::API::Color::operator=(const SekaiEngine::A
     return (*this);
 }
 
-SekaiEngine::API::Color& SekaiEngine::API::Color::operator=(const ::Color& color)
+SekaiEngine::API::Color& SekaiEngine::API::Color::operator=(const COLOR_API& color)
 {
     m_color = color;
     return (*this);

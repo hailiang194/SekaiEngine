@@ -1,7 +1,7 @@
 #ifndef SEKAI_ENGINE_API_VECTOR2D_HPP
 #define SEKAI_ENGINE_API_VECTOR2D_HPP
 
-#include "raylib.h"
+#include "./APIConfig.hpp"
 
 namespace SekaiEngine
 {
@@ -11,10 +11,10 @@ namespace SekaiEngine
         {
         public:
             Vector2D(const float &x = 0.0f, const float &y = 0.0f);
-            explicit Vector2D(const ::Vector2 &vector);
+            explicit Vector2D(const VECTOR2_API &vector);
             Vector2D(const Vector2D &vector);
             Vector2D &operator=(const Vector2D &vector);
-            Vector2D &operator=(const ::Vector2 &vector);
+            Vector2D &operator=(const VECTOR2_API &vector);
             ~Vector2D();
 
             const Vector2D operator+(const Vector2D &vector) const;
@@ -38,11 +38,11 @@ namespace SekaiEngine
             const float &y() const;
             float &y();
 
-            const ::Vector2& get() const;
-            const ::Vector2& get();
+            const VECTOR2_API& get() const;
+            const VECTOR2_API& get();
 
         private:
-            ::Vector2 m_vector;
+            VECTOR2_API m_vector;
         };
 
         inline const float &Vector2D::x() const
@@ -65,12 +65,12 @@ namespace SekaiEngine
             return const_cast<float&>(static_cast<const Vector2D&>(*this).y());
         }
 
-        inline const ::Vector2& Vector2D::get() const
+        inline const VECTOR2_API& Vector2D::get() const
         {
             return m_vector;
         }
 
-        inline const ::Vector2& Vector2D::get()
+        inline const VECTOR2_API& Vector2D::get()
         {
             return static_cast<const Vector2D&>(*this).get();
         }

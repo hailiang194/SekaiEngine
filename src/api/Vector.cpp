@@ -7,7 +7,7 @@ SekaiEngine::API::Vector2D::Vector2D(const float &x, const float &y)
 
 }
 
-SekaiEngine::API::Vector2D::Vector2D(const ::Vector2 &vector)
+SekaiEngine::API::Vector2D::Vector2D(const VECTOR2_API &vector)
     :m_vector(vector)
 {
 
@@ -25,7 +25,7 @@ SekaiEngine::API::Vector2D& SekaiEngine::API::Vector2D::operator=(const Vector2D
     return (*this);
 }
 
-SekaiEngine::API::Vector2D &SekaiEngine::API::Vector2D::operator=(const ::Vector2 &vector)
+SekaiEngine::API::Vector2D &SekaiEngine::API::Vector2D::operator=(const VECTOR2_API &vector)
 {
     m_vector = vector;
     return (*this);

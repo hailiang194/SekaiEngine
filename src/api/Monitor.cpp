@@ -1,6 +1,6 @@
 #include "./Monitor.hpp"
 
-SekaiEngine::API::Monitor::Monitor(MONITOR_CORE_TYPE core)
+SekaiEngine::API::Monitor::Monitor(const MONITOR_CORE_TYPE& core)
     :m_core(core)
 {
 

@@ -3,10 +3,9 @@
 
 #include <cstddef>
 #include <string>
-#include "raylib.h"
+#include "APIConfig.hpp"
 #include "./Vector.hpp"
 
-#define MONITOR_CORE_TYPE int
 
 namespace SekaiEngine
 {
@@ -15,7 +14,7 @@ namespace SekaiEngine
         class Monitor
         {
         public:
-            Monitor(MONITOR_CORE_TYPE core);
+            Monitor(const MONITOR_CORE_TYPE& core);
             Monitor(const Monitor& monitor);
             Monitor& operator=(const Monitor& monitor);
             ~Monitor();
@@ -46,7 +45,10 @@ namespace SekaiEngine
 
         inline const int Monitor::width() const
         {
+#ifdef RAYLIB_API
             return GetMonitorWidth(m_core);
+#else
+#endif
         }
 
         inline const int Monitor::width()
@@ -56,7 +58,10 @@ namespace SekaiEngine
 
         inline const int Monitor::height() const
         {
+#ifdef RAYLIB_API
             return GetMonitorHeight(m_core);
+#else
+#endif
         }
 
         inline const int Monitor::height()
@@ -71,7 +76,10 @@ namespace SekaiEngine
 
         inline const API::Vector2D Monitor::position() const
         {
+#ifdef RAYLIB_API
             return (API::Vector2D)GetMonitorPosition(m_core);
+#else
+#endif
         }
 
         inline const API::Vector2D Monitor::position()
@@ -81,7 +89,10 @@ namespace SekaiEngine
 
         inline const int Monitor::refreshRate() const
         {
+#ifdef RAYLIB_API
             return GetMonitorRefreshRate(m_core);
+#else
+#endif
         }
 
         inline const int Monitor::refreshRate()
@@ -91,8 +102,11 @@ namespace SekaiEngine
 
         inline const std::string Monitor::name() const
         {
+#ifdef RAYLIB_API
             const char* name = GetMonitorName(m_core);
             return std::string(name);
+#else
+#endif
         }
 
         inline const std::string Monitor::name()
@@ -107,12 +121,19 @@ namespace SekaiEngine
 
         inline const Monitor Monitor::currentMonitor()
         {
-            return Monitor(GetCurrentMonitor());
+#ifdef RAYLIB_API
+            MONITOR_CORE_TYPE current = GetCurrentMonitor();
+#else
+#endif
+            return Monitor(current);
         }
 
         inline const std::size_t Monitor::count()
         {
+#ifdef RAYLIB_API
             return static_cast<const std::size_t>(GetMonitorCount());
+#else
+#endif
         }
     } // namespace API
     

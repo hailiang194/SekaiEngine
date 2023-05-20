@@ -1,7 +1,7 @@
 #ifndef SEKAI_ENGINE_API_CAMERA_HPP
 #define SEKAI_ENGINE_API_CAMERA_HPP
 
-#include "raylib.h"
+#include "./APIConfig.hpp"
 #include "./Vector.hpp"
 
 namespace SekaiEngine
@@ -12,10 +12,10 @@ namespace SekaiEngine
         {
         public:
             Camera2D(const API::Vector2D& offset = API::Vector2D(), const API::Vector2D& target = API::Vector2D(), const float& rotation = 0.0f, const float& zoom = 1.0f);
-            explicit Camera2D(const ::Camera2D& camera);
+            explicit Camera2D(const CAMERA_API& camera);
             Camera2D(const Camera2D& camera);
             Camera2D& operator=(const Camera2D& camera);
-            Camera2D& operator=(const ::Camera2D& camera);
+            Camera2D& operator=(const CAMERA_API& camera);
             ~Camera2D();
 
             void start();

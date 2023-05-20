@@ -1,7 +1,7 @@
 #ifndef SEKAI_ENGINE_API_COLOR_HPP
 #define SEKAI_ENGINE_API_COLOR_HPP
 
-#include "raylib.h"
+#include "./APIConfig.hpp"
 #include <stdint.h>
 
 #define uint32_t uint32_t //0xRRGGBBAA
@@ -13,7 +13,7 @@ namespace SekaiEngine
         class Color
         {
         public:
-            explicit Color(const ::Color& color);
+            explicit Color(const COLOR_API& color);
 
             /// @brief Init color by int
             /// @param color color in hex 0xRRGGBBAA
@@ -23,7 +23,7 @@ namespace SekaiEngine
             
             Color& operator=(const Color& color);
             
-            Color& operator=(const ::Color& color);
+            Color& operator=(const COLOR_API& color);
             
             /// @brief assign constructor by int
             /// @param color color in hex 0xRRGGBBAA
@@ -37,8 +37,8 @@ namespace SekaiEngine
             uint32_t getCode() const;
             uint32_t getCode();
 
-            const ::Color& get() const;
-            const ::Color& get();
+            const COLOR_API& get() const;
+            const COLOR_API& get();
 
             const unsigned char& r() const;
             unsigned char& r();
@@ -52,7 +52,7 @@ namespace SekaiEngine
             const unsigned char& a() const;
             unsigned char& a();
         private:
-            ::Color m_color;
+            COLOR_API m_color;
         };
 
         inline uint32_t Color::getCode() const
@@ -65,12 +65,12 @@ namespace SekaiEngine
             return static_cast<const Color&>(*this).getCode();
         }
 
-        inline const ::Color& Color::get() const
+        inline const COLOR_API& Color::get() const
         {
             return m_color;
         }
 
-        inline const ::Color& Color::get()
+        inline const COLOR_API& Color::get()
         {
             return static_cast<const Color&>(*this).get();
         }
