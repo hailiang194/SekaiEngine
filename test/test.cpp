@@ -91,7 +91,7 @@ TEST(EngineTest, TestVectorProductAndRaylibVector)
   EXPECT_TRUE(sumVector == (SekaiEngine::API::Vector2D)raylibVector);
 }
 
-//Shape intersect
+// Shape intersect
 
 TEST(EngineTest, TestPointInterect)
 {
@@ -120,7 +120,6 @@ TEST(EngineTest, TestPointAndLineInterect)
   SekaiEngine::API::Point p({2.0f, 2.0f});
   EXPECT_TRUE(p.intersect(l));
 }
-
 
 TEST(EngineTest, TestPointAndLineCodirectionalButNotInterect)
 {
@@ -163,3 +162,39 @@ TEST(EngineTest, TestPointAndCircleNotInterect)
   SekaiEngine::API::Point p({5.0f, 3.0f});
   EXPECT_FALSE(p.intersect(c));
 }
+
+TEST(EngineTest, TestRectAndPointInterect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Point p({4.0f, 4.0f});
+  EXPECT_TRUE(r.intersect(p));
+}
+
+TEST(EngineTest, TestPointAndRectInterect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Point p({4.0f, 4.0f});
+  EXPECT_TRUE(p.intersect(r));
+}
+
+TEST(EngineTest, TestRectAndPointNotIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Point p({9.0f, 6.0f});
+  EXPECT_FALSE(p.intersect(r));
+}
+
+TEST(EngineTest, TestRectAndRectIntersect)
+{
+  SekaiEngine::API::Rectangle r1({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Rectangle r2({4.0f, 4.0f}, 7.0f, 2.0f);
+  EXPECT_TRUE(r1.intersect(r2));
+}
+
+TEST(EngineTest, TestRectAndRectNotIntersect)
+{
+  SekaiEngine::API::Rectangle r1({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Rectangle r2({9.0f, 6.0f}, 7.0f, 2.0f);
+  EXPECT_FALSE(r1.intersect(r2));
+}
+

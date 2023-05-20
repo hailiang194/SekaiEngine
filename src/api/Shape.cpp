@@ -79,7 +79,7 @@ const bool isIntersectRectWithRect(const SekaiEngine::API::Rectangle& r1, const 
         SekaiEngine::Utility::cmpFloat(r1.position().x() + r1.width(), r2.position().x()) >= 0 &&
         SekaiEngine::Utility::cmpFloat(r1.position().x(), r2.width() + r2.position().x()) <= 0 &&
         SekaiEngine::Utility::cmpFloat(r1.position().y() + r1.height(), r2.position().y()) >= 0 &&
-        SekaiEngine::Utility::cmpFloat(r1.position().y(), r2.width() + r2.position().y()) >= 0
+        SekaiEngine::Utility::cmpFloat(r1.position().y(), r2.width() + r2.position().y()) <= 0
     );
 }
 
