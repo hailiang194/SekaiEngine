@@ -198,3 +198,93 @@ TEST(EngineTest, TestRectAndRectNotIntersect)
   EXPECT_FALSE(r1.intersect(r2));
 }
 
+TEST(EngineTest, TestRectAndCircleTopLeftIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({1.0f, 1.0f}, 3.0f);
+  EXPECT_TRUE(r.intersect(c));
+}
+
+TEST(EngineTest, TestCircleAndRectTopLeftIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({1.0f, 1.0f}, 3.0f);
+  EXPECT_TRUE(c.intersect(r));
+}
+
+TEST(EngineTest, TestRectAndCircleTopLeftNotIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({-5.0f, -5.0f}, 3.0f);
+  EXPECT_FALSE(r.intersect(c));
+}
+
+TEST(EngineTest, TestCircleAndRectTopRightIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({8.0f, 1.0f}, 3.0f);
+  EXPECT_TRUE(c.intersect(r));
+}
+
+TEST(EngineTest, TestRectAndCircleTopRightNotIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({10.0f, -5.0f}, 3.0f);
+  EXPECT_FALSE(r.intersect(c));
+}
+
+TEST(EngineTest, TestCircleAndRectMiddleLeftIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({1.0f, 4.0f}, 3.0f);
+  EXPECT_TRUE(c.intersect(r));
+}
+
+TEST(EngineTest, TestRectAndCircleMiddleLeftNotIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({-5.0f, 4.0f}, 3.0f);
+  EXPECT_FALSE(r.intersect(c));
+}
+
+TEST(EngineTest, TestCircleAndRectMiddleRightIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({8.0f, 4.0f}, 3.0f);
+  EXPECT_TRUE(c.intersect(r));
+}
+
+TEST(EngineTest, TestRectAndCircleMiddleRightNotIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({11.0f, 4.0f}, 3.0f);
+  EXPECT_FALSE(r.intersect(c));
+}
+
+TEST(EngineTest, TestCircleAndRectBottomLeftIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({1.0f, 6.0f}, 3.0f);
+  EXPECT_TRUE(c.intersect(r));
+}
+
+TEST(EngineTest, TestRectAndCircleBottomLeftNotIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({-5.0f, 6.0f}, 3.0f);
+  EXPECT_FALSE(r.intersect(c));
+}
+
+TEST(EngineTest, TestCircleAndRectBottomRightIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({8.0f, 6.0f}, 3.0f);
+  EXPECT_TRUE(c.intersect(r));
+}
+
+TEST(EngineTest, TestRectAndCircleBottomRightNotIntersect)
+{
+  SekaiEngine::API::Rectangle r({2.0f, 2.0f}, 5.0f, 3.0f);
+  SekaiEngine::API::Circle c({10.0f, 6.0f}, 3.0f);
+  EXPECT_FALSE(r.intersect(c));
+}

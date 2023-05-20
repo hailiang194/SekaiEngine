@@ -67,8 +67,30 @@ const bool isIntersectRectWithLine(const SekaiEngine::API::Rectangle& r, const S
 
 const bool isIntersectRectWithCircle(const SekaiEngine::API::Rectangle& r, const SekaiEngine::API::Circle& c)
 {
-    assert(true && "Not support yet");
-    return false;
+    //ref: https://yal.cc/rectangle-circle-intersection-test/
+
+    // find the point of rectangle that is the closest to the circle' center
+    float closestX = c.origin().x();
+    float closestY = c.origin().y();
+
+    if(SekaiEngine::Utility::cmpFloat(closestX, r.position().x()) < 0)
+    {
+        closestX = r.position().x();
+    }
+    else if(SekaiEngine::Utility::cmpFloat(closestX, r.position().x() + r.width()) > 0)
+    {
+        closestX = r.position().x() + r.width();
+    }
+
+    if(SekaiEngine::Utility::cmpFloat(closestY, r.position().y()) < 0)
+    {
+        closestY = r.position().y();
+    }
+    else if(SekaiEngine::Utility::cmpFloat(closestY, r.position().y() + r.height()) > 0)
+    {
+        closestY = r.position().y() + r.height();
+    }
+    return isIntersectCircleWithPoint(c, SekaiEngine::API::Point({closestX, closestY}));
 }
 
 const bool isIntersectRectWithRect(const SekaiEngine::API::Rectangle& r1, const SekaiEngine::API::Rectangle& r2)
