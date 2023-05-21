@@ -71,6 +71,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return VECTOR2_API{m_x, m_y};
 #else
+
 #endif
         }
 

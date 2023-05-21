@@ -29,6 +29,7 @@ namespace SekaiEngine
             virtual void setup();
             virtual void update();
             virtual void render();
+            virtual void destroy();
 
             void addObject(GameObject* object, const SCENCE_LAYER& layer = SCENCE_LAYER::CAMERA);
 

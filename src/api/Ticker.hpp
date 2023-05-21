@@ -34,6 +34,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return GetFrameTime();
 #else
+
 #endif
         }
 
@@ -47,6 +48,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return GetTime();
 #else
+
 #endif
         }
 

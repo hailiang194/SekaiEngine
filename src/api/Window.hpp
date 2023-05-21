@@ -3,6 +3,7 @@
 
 #include "./Monitor.hpp"
 #include "api/Vector.hpp"
+#include "api/Image.hpp"
 #include <string>
 #include <cassert>
 
@@ -50,7 +51,7 @@ namespace SekaiEngine
             void toggleFullscreen();
             void setWindowState(const WindowState& state);
             void setTitle(const std::string& title);
-            //Set Icon [Waiting for Image API]
+            void setIcon(const API::Image& image);
             void setPosition(const API::Vector2D& position);
             void setMinSize(const int& width, const int& height);
             void setOpacity(const float& opacity);
@@ -136,6 +137,14 @@ namespace SekaiEngine
             return GetScreenWidth();
 #else
 #endif
+        }
+
+        inline void Window::setIcon(const API::Image& image)
+        {
+#ifdef RAYLIB_API
+            SetWindowIcon(image.get());
+#else
+#endif                
         }
 
         inline const API::Vector2D Window::position()

@@ -3,6 +3,7 @@
 
 #include "api/Monitor.hpp"
 #include "core/Scence.hpp"
+#include "Game.hpp"
 #include <string>
 #include <functional>
 #include <iostream>
@@ -20,7 +21,7 @@ namespace SekaiEngine
         class Application
         {
         public:
-            Application(const std::string& title = "SekaiEngineGame", const int& width = API::Monitor::currentMonitor().width(), const int& height = API::Monitor::currentMonitor().height());
+            Application(const std::string& title = "SekaiEngineGame", const int& width = 0, const int& height = 0, const API::Ticker& ticker = API::Ticker());
             ~Application();
             void addScrence(const std::string& name, Core::Scence* scence);
             void start(const std::string& initScenceName, std::function<void(const std::exception&)> exceptionCallback = DEFAULT_EXCEPTION_CALLBACK);

@@ -48,6 +48,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return GetMonitorWidth(m_core);
 #else
+
 #endif
         }
 
@@ -61,6 +62,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return GetMonitorHeight(m_core);
 #else
+
 #endif
         }
 
@@ -79,6 +81,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return (API::Vector2D)GetMonitorPosition(m_core);
 #else
+
 #endif
         }
 
@@ -92,6 +95,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return GetMonitorRefreshRate(m_core);
 #else
+
 #endif
         }
 
@@ -106,6 +110,7 @@ namespace SekaiEngine
             const char* name = GetMonitorName(m_core);
             return std::string(name);
 #else
+
 #endif
         }
 
@@ -124,6 +129,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             MONITOR_CORE_TYPE current = GetCurrentMonitor();
 #else
+
 #endif
             return Monitor(current);
         }
@@ -133,6 +139,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return static_cast<const std::size_t>(GetMonitorCount());
 #else
+
 #endif
         }
     } // namespace API

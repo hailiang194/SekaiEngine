@@ -46,6 +46,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return ExportImage(*m_image, path.c_str());
 #else
+
 #endif
         }
 

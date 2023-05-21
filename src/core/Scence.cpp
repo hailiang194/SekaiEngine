@@ -68,6 +68,13 @@ void SekaiEngine::Core::Scence::render()
     _endRender();
 }
 
+void SekaiEngine::Core::Scence::destroy()
+{
+    m_ctBack.destroy();
+    m_ctCamera.destroy();
+    m_ctFront.destroy();
+}
+
 void SekaiEngine::Core::Scence::addObject(GameObject *object, const SCENCE_LAYER &layer)
 {
     switch (layer)
@@ -93,6 +100,7 @@ void SekaiEngine::Core::Scence::_beginRender()
     BeginDrawing();
     ClearBackground(m_background.get());
 #else
+
 #endif
 }
 
@@ -101,5 +109,6 @@ void SekaiEngine::Core::Scence::_endRender()
 #ifdef RAYLIB_API
     EndDrawing();
 #else
+
 #endif
 }

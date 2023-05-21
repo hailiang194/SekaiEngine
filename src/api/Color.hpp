@@ -74,6 +74,7 @@ namespace SekaiEngine
 #ifdef RAYLIB_API
             return COLOR_API{m_r, m_g, m_b, m_a};
 #else
+
 #endif
         }
 

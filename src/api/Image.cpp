@@ -9,6 +9,7 @@ const ID_API getIDFromRawImage(const IMAGE_API& img)
 #ifdef RAYLIB_API
     return reinterpret_cast<ID_API>(img.data);
 #else
+
 #endif
 }
 
@@ -17,6 +18,7 @@ const void unloadRawImage(const IMAGE_API& image)
 #ifdef RAYLIB_API
             UnloadImage(image);
 #else
+
 #endif
 }
 
@@ -32,6 +34,7 @@ SekaiEngine::API::Image::Image(const std::string& path)
     images->insert({getIDFromRawImage(image), image});
     m_image = &images->at(getIDFromRawImage(image));
 #else
+
 #endif
 }
 
@@ -91,5 +94,6 @@ const SekaiEngine::API::Image SekaiEngine::API::Image::getScreenShot()
     images->insert({getIDFromRawImage(image), image});
     return SekaiEngine::API::Image(getIDFromRawImage(image));
 #else
+
 #endif
 }

@@ -4,6 +4,7 @@
 #ifdef RAYLIB_API
 #define RAW_TO_VECTOR(vec) m_x = vec.x; m_y = vec.y;
 #else
+
 #endif
 
 SekaiEngine::API::Vector2D::Vector2D(const float &x, const float &y)

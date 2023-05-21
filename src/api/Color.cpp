@@ -8,6 +8,7 @@
     m_a = color.a; 
 
 #else
+
 #endif
 
 SekaiEngine::API::Color::Color(const COLOR_API& color)
