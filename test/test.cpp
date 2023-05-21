@@ -25,7 +25,8 @@ TEST(EngineTest, TestRaylibColorEqualToCode)
 TEST(EngineTest, TestRaylibColorEqualToRaylibColor)
 {
   SekaiEngine::API::Color a(GREEN);
-  EXPECT_TRUE(a == (SekaiEngine::API::Color)GREEN);
+  bool result = (a == (SekaiEngine::API::Color)GREEN);
+  EXPECT_TRUE(result);
 }
 
 TEST(EngineTest, TestCodeEqualToCode)
@@ -37,7 +38,8 @@ TEST(EngineTest, TestCodeEqualToCode)
 TEST(EngineTest, TestCodeEqualToRaylibColor)
 {
   SekaiEngine::API::Color a(0x00e430ff);
-  EXPECT_TRUE(a == (SekaiEngine::API::Color)GREEN);
+  bool result = (a == (SekaiEngine::API::Color)GREEN); 
+  EXPECT_TRUE(result);
 }
 
 TEST(EngineTest, TestCodeWithRed)
