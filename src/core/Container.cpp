@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <algorithm>
 #include "./Container.hpp"
 
 SekaiEngine::Core::Container::Container(const int &zIndex, const bool &isAlive)
