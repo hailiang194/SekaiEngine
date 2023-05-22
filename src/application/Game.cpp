@@ -1,6 +1,7 @@
 #include <stdexcept>
 #include "./Game.hpp"
 #include "api/Image.hpp"
+#include "api/Texture.hpp"
 
 SekaiEngine::Application::Game* SekaiEngine::Application::Game::g_instance = nullptr;
 
@@ -13,6 +14,8 @@ SekaiEngine::Application::Game::Game(const std::string& title, const int& width,
     :m_window(width, height, title), m_ticker(ticker), m_scences(), m_currentScence(nullptr)
 {
     SekaiEngine::API::Image::init();
+    SekaiEngine::API::Texture::init();
+
 }
 
 SekaiEngine::Application::Game::~Game()
@@ -88,6 +91,7 @@ void SekaiEngine::Application::Game::_update()
 
 void SekaiEngine::Application::Game::_exit()
 {
+    SekaiEngine::API::Texture::unload();
     SekaiEngine::API::Image::unload();
     for(auto iter = m_scences.begin(); iter != m_scences.end(); ++iter)
     {

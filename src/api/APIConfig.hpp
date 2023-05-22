@@ -9,6 +9,7 @@
 #define MONITOR_CORE_TYPE int
 #define VECTOR2_API ::Vector2
 #define IMAGE_API ::Image
+#define TEXTURE_API ::Texture
 #define ID_API uintptr_t
 
 #else

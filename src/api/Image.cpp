@@ -7,6 +7,7 @@ std::unordered_map<ID_API, IMAGE_API>* images = nullptr;
 const ID_API getIDFromRawImage(const IMAGE_API& img)
 {
 #ifdef RAYLIB_API
+    //ref: https://stackoverflow.com/questions/34291377/converting-a-non-void-pointer-to-uintptr-t-and-vice-versa
     return reinterpret_cast<ID_API>(img.data);
 #else
 
@@ -30,7 +31,6 @@ SekaiEngine::API::Image::Image(const std::string& path)
     {
         throw std::ifstream::failure("Failed to read Image");
     }
-    //ref: https://stackoverflow.com/questions/34291377/converting-a-non-void-pointer-to-uintptr-t-and-vice-versa
     images->insert({getIDFromRawImage(image), image});
     m_image = &images->at(getIDFromRawImage(image));
 #else

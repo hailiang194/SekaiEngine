@@ -13,6 +13,7 @@ set(engine_public_headers
     src/utility/math.hpp
     src/api/APIConfig.hpp
     src/api/Image.hpp
+    src/api/Texture.hpp
     src/api/Color.hpp
     src/api/Camera2D.hpp
     src/api/Monitor.hpp
@@ -32,6 +33,7 @@ set(engine_public_headers
 set(engine_sources
     src/utility/math.cpp
     src/api/Image.cpp
+    src/api/Texture.cpp
     src/api/Color.cpp
     src/api/Camera2D.cpp
     src/api/Monitor.cpp
