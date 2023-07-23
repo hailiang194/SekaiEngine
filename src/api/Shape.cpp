@@ -1,5 +1,6 @@
 #include "utility/math.hpp"
 #include <cassert>
+#include "./DrawGraphic.hpp"
 #include "./Shape.hpp"
 
 const bool isIntersectPointWithPoint(const SekaiEngine::API::Point& p1, const SekaiEngine::API::Point& p2)
@@ -59,10 +60,56 @@ const bool isIntersectRectWithPoint(const SekaiEngine::API::Rectangle& r, const 
     );
 }
 
+bool LiangBarsky (double edgeLeft, double edgeRight, double edgeBottom, double edgeTop,   // Define the x/y clipping values for the border.
+                  double x0src, double y0src, double x1src, double y1src,                 // Define the start and end points of the line.
+                  double &x0clip, double &y0clip, double &x1clip, double &y1clip)         // The output values, so declare these outside.
+{
+    //ref: https://www.skytopia.com/project/articles/compsci/clipping.html
+    double t0 = 0.0;    double t1 = 1.0;
+    double xdelta = x1src-x0src;
+    double ydelta = y1src-y0src;
+    double p,q,r;
+
+    for(int edge=0; edge<4; edge++) {   // Traverse through left, right, bottom, top edges.
+        if (edge==0) {  p = -xdelta;    q = -(edgeLeft-x0src);  }
+        if (edge==1) {  p = xdelta;     q =  (edgeRight-x0src); }
+        if (edge==2) {  p = -ydelta;    q = -(edgeBottom-y0src);}
+        if (edge==3) {  p = ydelta;     q =  (edgeTop-y0src);   }   
+        r = q/p;
+        if(p==0 && q<0) return false;   // Don't draw line at all. (parallel line outside)
+
+        if(p<0) {
+            if(r>t1) return false;         // Don't draw line at all.
+            else if(r>t0) t0=r;            // Line is clipped!
+        } else if(p>0) {
+            if(r<t0) return false;      // Don't draw line at all.
+            else if(r<t1) t1=r;         // Line is clipped!
+        }
+    }
+
+    x0clip = x0src + t0*xdelta;
+    y0clip = y0src + t0*ydelta;
+    x1clip = x0src + t1*xdelta;
+    y1clip = y0src + t1*ydelta;
+
+    return true;        // (clipped) line is drawn
+}
+
+
+
 const bool isIntersectRectWithLine(const SekaiEngine::API::Rectangle& r, const SekaiEngine::API::Line& l)
 {
-    assert(true && "Not support yet");
-    return false;
+    double x1 = 0; 
+    double y1 = 0; 
+    double x2 = 0;
+    double y2 = 0;
+
+    return LiangBarsky(static_cast<double>(r.position().x()), static_cast<double>(r.position().x() + r.width()), 
+    static_cast<double>(r.position().y() + r.height()), static_cast<double>(r.position().y()),
+    static_cast<double>(l.first().x()), static_cast<double>(l.first().y()), 
+    static_cast<double>(l.second().x()), static_cast<double>(l.second().y()),
+    x1, y1, x2, y2
+    );
 }
 
 const bool isIntersectRectWithCircle(const SekaiEngine::API::Rectangle& r, const SekaiEngine::API::Circle& c)
@@ -183,6 +230,23 @@ const bool SekaiEngine::API::Point::intersect(const Shape& shape) const
     return false;
 }
 
+#define RELATIVE_POINT(point) { \
+        properties.offset().x() + (point).x() * properties.scale().x(), \
+        properties.offset().y() + (point).y() * properties.scale().y() \
+    }
+
+const bool SekaiEngine::API::Point::isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape) const
+{
+    API::Vector2D relativePosition = RELATIVE_POINT(this->point());
+    return shape.intersect((Point)relativePosition);
+}
+
+void SekaiEngine::API::Point::render(const Renderable::RenderableProperties properties)
+{
+    API::Vector2D relativePosition = RELATIVE_POINT(this->point());
+    API::drawPoint((Point)relativePosition, properties.color());
+}
+
 SekaiEngine::API::Line::Line(const API::Vector2D& first, const API::Vector2D& second)
     :Shape(), m_first(first), m_second(second)
 {
@@ -235,6 +299,20 @@ const bool SekaiEngine::API::Line::intersect(const Shape& shape) const
         return isIntersectRectWithLine(*r, *this);
     }
     return false;
+}
+
+const bool SekaiEngine::API::Line::isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape) const
+{
+    API::Vector2D firstRelative = RELATIVE_POINT(this->first());
+    API::Vector2D secondRelative = RELATIVE_POINT(this->second());
+    return shape.intersect(API::Line(firstRelative, secondRelative));
+}
+
+void SekaiEngine::API::Line::render(const Renderable::RenderableProperties properties)
+{
+    API::Vector2D firstRelative = RELATIVE_POINT(this->first());
+    API::Vector2D secondRelative = RELATIVE_POINT(this->second());
+    API::drawLine(API::Line(firstRelative, secondRelative), properties.color(), properties.thick() == FILL_THICK ? 1.0f : properties.thick());
 }
 
 SekaiEngine::API::Circle::Circle(const API::Vector2D& origin, const float& radius)
@@ -291,6 +369,28 @@ const bool SekaiEngine::API::Circle::intersect(const Shape& shape) const
     return false;
 }
 
+const bool SekaiEngine::API::Circle::isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape) const
+{
+    API::Vector2D relativeOrigin = RELATIVE_POINT(this->origin());
+    float relativeRadius = this->radius() * properties.scale().x();
+    return shape.intersect(API::Circle(relativeOrigin, relativeRadius));
+}
+
+void SekaiEngine::API::Circle::render(const Renderable::RenderableProperties properties)
+{
+    API::Vector2D relativeOrigin = RELATIVE_POINT(this->origin());
+    float relativeRadius = this->radius() * properties.scale().x();
+    if(properties.thick() == FILL_THICK || Utility::cmpFloat(relativeRadius, properties.thick()) <= 0)
+    {
+        API::drawCircle(API::Circle(relativeOrigin, relativeRadius), properties.color(),
+        properties.segments(), properties.startAngle(), properties.endAngle());
+    }
+    else
+    {
+        API::drawRing(relativeOrigin, relativeRadius, relativeRadius - properties.thick(), properties.color(), properties.segments(),
+        properties.startAngle(), properties.endAngle());
+    }
+}
 
 SekaiEngine::API::Rectangle::Rectangle(const API::Vector2D& position, const float& width, const float& height)
     :Shape(), m_position(position), m_width(width), m_height(height)
@@ -345,4 +445,20 @@ const bool SekaiEngine::API::Rectangle::intersect(const Shape& shape) const
         return isIntersectRectWithRect(*this, *r);
     }
     return false;
+}
+
+const bool SekaiEngine::API::Rectangle::isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape) const
+{
+    API::Vector2D relativePostion = RELATIVE_POINT(this->position());
+    float relativeWith = this->width() * properties.scale().x();
+    float relativeHeight = this->height() * properties.scale().y();
+    return shape.intersect(API::Rectangle(relativePostion, relativeWith, relativeHeight));
+}
+
+void SekaiEngine::API::Rectangle::render(const Renderable::RenderableProperties properties)
+{
+    API::Vector2D relativePostion = RELATIVE_POINT(this->position());
+    float relativeWith = this->width() * properties.scale().x();
+    float relativeHeight = this->height() * properties.scale().y();
+    API::drawRectangle(API::Rectangle(relativePostion, relativeWith, relativeHeight), properties.color());
 }

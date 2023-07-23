@@ -21,6 +21,7 @@ set(engine_public_headers
     src/api/Vector.hpp
     src/api/Ticker.hpp
     src/api/Shape.hpp
+    src/api/DrawGraphic.hpp
     src/core/GameObject.hpp
     src/core/Container.hpp
     src/core/Scence.hpp
@@ -28,6 +29,7 @@ set(engine_public_headers
     src/application/Game.hpp
     src/renderable/Renderable.hpp
     src/renderable/RenderableProperties.hpp
+    src/renderable/RenderableGraphic.hpp
 )
 
 set(engine_sources
@@ -48,6 +50,7 @@ set(engine_sources
     src/application/Game.cpp
     src/renderable/Renderable.cpp
     src/renderable/RenderableProperties.cpp
+    src/renderable/RenderableGraphic.cpp
 )
 
 add_library(${PROJECT_NAME} STATIC ${engine_sources} ${engine_public_headers})

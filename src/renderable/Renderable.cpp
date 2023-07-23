@@ -36,10 +36,13 @@ void SekaiEngine::Renderable::Renderable::update()
         return;
     }
 
-    m_absolute.updateOffset(API::Vector2D(
-        m_parent->offset()->x() + m_parent->scale().x() * m_absolute.offset()->x(),
-        m_parent->offset()->y() + m_parent->scale().y() * m_absolute.offset()->y()
-    ));
+    // m_absolute.updateOffset(API::Vector2D(
+    //     m_parent->offset()->x() + m_parent->scale().x() * m_absolute.offset()->x(),
+    //     m_parent->offset()->y() + m_parent->scale().y() * m_absolute.offset()->y()
+    // ));
+    m_absolute.offset().x() = m_parent->offset().x() + m_parent->scale().x() * m_relative.offset().x();
+    m_absolute.offset().y() = m_parent->offset().y() + m_parent->scale().y() * m_relative.offset().y();
+    
     m_absolute.thick() = m_parent->thick() * m_relative.thick();
     m_absolute.scale() = API::Vector2D(
         m_parent->scale().x() * m_relative.scale().x(),

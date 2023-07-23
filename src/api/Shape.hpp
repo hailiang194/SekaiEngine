@@ -2,6 +2,7 @@
 #define SEKAI_ENGINE_API_SHAPE_HPP
 
 #include "./Vector.hpp"
+#include "renderable/RenderableProperties.hpp"
 
 namespace SekaiEngine
 {
@@ -17,6 +18,11 @@ namespace SekaiEngine
 
             virtual const bool intersect(const Shape& shape) const = 0;
             const bool intersect(const Shape& shape);
+
+            virtual const bool isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape) const = 0;
+            const bool isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape);
+
+            virtual void render(const Renderable::RenderableProperties properties) = 0;
         };
 
         class Point: public Shape
@@ -29,6 +35,8 @@ namespace SekaiEngine
             ~Point();
 
             const bool intersect(const Shape& shape) const override;
+            const bool isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape) const override;
+            void render(const Renderable::RenderableProperties properties) override;
 
             const API::Vector2D& point() const;
             API::Vector2D& point();
@@ -45,6 +53,8 @@ namespace SekaiEngine
             ~Line();
 
             const bool intersect(const Shape& shape) const override;
+            const bool isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape) const override;
+            void render(const Renderable::RenderableProperties properties) override;
 
             const API::Vector2D& first() const;
             API::Vector2D& first();
@@ -64,7 +74,9 @@ namespace SekaiEngine
             Circle& operator=(const Circle& circle);
             ~Circle();
 
-            const bool intersect(const Shape& shape) const override;
+            const bool intersect(const Shape& shape) const override;            
+            const bool isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape) const override;
+            void render(const Renderable::RenderableProperties properties) override;
 
             const API::Vector2D& origin() const;
             API::Vector2D& origin();
@@ -86,6 +98,8 @@ namespace SekaiEngine
             ~Rectangle();
 
             const bool intersect(const Shape& shape) const override;
+            const bool isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape) const override;
+            void render(const Renderable::RenderableProperties properties) override;
 
             const API::Vector2D& position() const;
             API::Vector2D& position();
@@ -101,6 +115,11 @@ namespace SekaiEngine
             float m_width;
             float m_height;
         };
+
+        inline const bool Shape::isRenderable(const Renderable::RenderableProperties& properties, const Shape& shape)
+        {
+            return static_cast<const Shape&>(*this).isRenderable(properties, shape);
+        }
 
         inline const bool Shape::intersect(const Shape& shape)
         {
