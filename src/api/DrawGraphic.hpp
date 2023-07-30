@@ -2,6 +2,7 @@
 #define SEKAI_ENGINE_API_DRAW_GRAPHIC_HPP
 
 #include "./Shape.hpp"
+#include "./Texture.hpp"
 #include "./Color.hpp"
 
 namespace SekaiEngine
@@ -46,6 +47,18 @@ namespace SekaiEngine
         /// @param rect draw rectangle
         /// @param color color
         void drawRectangle(const API::Rectangle& rect, const API::Color& color);
+
+
+        /// @brief draw texture with texture coordinate
+        /// @param texture draw texture
+        /// @param source texture coordinate
+        /// @param dest draw position and the dimesion
+        /// @param origin rotation origin
+        /// @param rotation rotation degree
+        /// @param color texture color
+        void drawTexture(const API::Texture& texture, const API::Rectangle& source, const API::Rectangle& dest, 
+            const API::Vector2D& origin, const float& rotation, const API::Color& color
+        );
     } // namespace API
     
 } // namespace SekaiEngine

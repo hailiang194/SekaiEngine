@@ -43,6 +43,7 @@ set(engine_sources
     src/api/Vector.cpp
     src/api/Ticker.cpp
     src/api/Shape.cpp
+    src/api/DrawGraphic.cpp
     src/core/GameObject.cpp
     src/core/Container.cpp
     src/core/Scence.cpp

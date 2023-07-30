@@ -18,7 +18,7 @@ void SekaiEngine::API::drawBounding(const API::Rectangle& bouding)
 void SekaiEngine::API::drawPoint(const API::Point& point, const API::Color& color)
 {
 #ifdef RAYLIB_API
-    DrawPixel(point.point().x(), point.point().y(), color.get());
+    DrawPixel(static_cast<int>(point.point().x()), static_cast<int>(point.point().y()), color.get());
 #else
 #endif 
 }
@@ -26,7 +26,7 @@ void SekaiEngine::API::drawPoint(const API::Point& point, const API::Color& colo
 void SekaiEngine::API::drawLine(const API::Line& line, const API::Color& color, const float& thickness)
 {
 #ifdef RAYLIB_API
-    DrawLineEx(line.first().get(), line.second().get(), thick, color.get());
+    DrawLineEx(line.first().get(), line.second().get(), thickness, color.get());
 #else
 #endif
 }
@@ -51,7 +51,32 @@ void SekaiEngine::API::drawRing(const API::Vector2D& origin, const float& outerR
 void SekaiEngine::API::drawRectangle(const API::Rectangle& rect, const API::Color& color)
 {
 #ifdef RAYLIB_API
-    DrawRectangle(rect.position().x(), rect.position().y(), rect.width(), rect.height(), color.get());
+    DrawRectangle(static_cast<int>(rect.position().x()), static_cast<int>(rect.position().y()), 
+    static_cast<int>(rect.width()), static_cast<int>(rect.height()), color.get());
+#else
+#endif
+}
+
+void SekaiEngine::API::drawTexture(const API::Texture& texture, const API::Rectangle& source, const API::Rectangle& dest, 
+            const API::Vector2D& origin, const float& rotation, const API::Color& color
+)
+{
+#ifdef RAYLIB_API
+    ::Rectangle rSource = {
+        source.position().x(),
+        source.position().y(),
+        source.width(),
+        source.height()
+    };
+
+    ::Rectangle rDest = {
+        dest.position().x(),
+        dest.position().y(),
+        dest.width(),
+        dest.height()
+    };
+    
+    DrawTexturePro(texture.get(), rSource, rDest, origin.get(), rotation, color.get());
 #else
 #endif
 }
