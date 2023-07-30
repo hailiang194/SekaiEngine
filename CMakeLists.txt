@@ -80,3 +80,17 @@ if(RUN_TEST)
     include(GoogleTest)
     gtest_discover_tests(engine_test)
 endif()
+
+install(
+    TARGETS ${PROJECT_NAME}
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+    RUNTIME DESTINATION bin
+)
+
+install(
+        DIRECTORY "${CMAKE_SOURCE_DIR}/src" # source directory
+        DESTINATION "include" # target directory
+        FILES_MATCHING # install only matched files
+        PATTERN "*.hpp" # select header files
+)
